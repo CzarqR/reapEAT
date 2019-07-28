@@ -1,0 +1,11 @@
+C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.exe.config
+C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.exe
+C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.pdb
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.csprojAssemblyReference.cache
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.csproj.CoreCompileInputs.cache
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.exe
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.pdb
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.csproj.GenerateResource.cache
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Login.resources
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Main.resources
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Recipe.resources
