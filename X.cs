@@ -22,7 +22,8 @@ namespace reapEAT
             return ConfigurationManager.AppSettings["ImageFolder"];
         }
 
-        public static int IdUser;
+        // set one to test mode, change after finish !!!!!!!!!!!!!
+        public static int IdUser = 1;
 
         
 

@@ -32,10 +32,5 @@ namespace reapEAT
             }
         }
 
-        public static void TEST(Label label)
-        {
-            label.Location = new Point(500, 500);
-        }
-
     }
 }

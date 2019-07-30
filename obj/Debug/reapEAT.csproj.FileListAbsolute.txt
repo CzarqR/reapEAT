@@ -9,3 +9,4 @@ C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.csproj.GenerateResource.c
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Login.resources
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Main.resources
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Recipe.resources
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Fridge.resources

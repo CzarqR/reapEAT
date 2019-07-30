@@ -73,8 +73,13 @@ namespace reapEAT
                 {
                     Label label = new Label
                     {
-                        Text = row.Field<string>("Name"),
+                        Text = row.Field<string>("Name") + "  -  " + row.Field<double>("Quantity") +"  "  +(row.Field<string>("Measure") == "G"? (row.Field<double>("Quantity") == 1 ? "Gram" : "Grams")  : (row.Field<double>("Quantity") == 1 ? "Milliliter" : "Millilitres") ),
+
+
+                        AutoSize = true
                     };
+
+
                     labels.Add(label);
                 }
             }

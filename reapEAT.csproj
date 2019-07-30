@@ -49,6 +49,12 @@
   <ItemGroup>
     <Compile Include="DisplayElements.cs" />
     <Compile Include="FindIngridient.cs" />
+    <Compile Include="Fridge.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fridge.Designer.cs">
+      <DependentUpon>Fridge.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListViewCompare.cs" />
     <Compile Include="LoadDB.cs" />
     <Compile Include="Login.cs">
@@ -78,6 +84,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Fridge.resx">
+      <DependentUpon>Fridge.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

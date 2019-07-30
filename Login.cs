@@ -126,103 +126,123 @@ namespace reapEAT
 
                 try
                 {
-                    using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
-                    {
-                        string query;
-                        SqlDataAdapter sqlDataAdapter;
-                        DataTable dataTable = new DataTable();
+                using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+                {
+                    string query;
+                    SqlDataAdapter sqlDataAdapter;
+                    DataTable dataTable = new DataTable();
 
-                        ///Checking Email
-                        string email = txtEmail.Text.Trim();
-                        if (email.Length < 5 || email.IndexOf("@") == -1 || email.IndexOf(".") == -1) /// Wrong email format
+                    ///Checking Email
+                    string email = txtEmail.Text.Trim();
+                    if (email.Length < 5 || email.IndexOf("@") == -1 || email.IndexOf(".") == -1) /// Wrong email format
+                    {
+                        lblEmailInfo.Text = "Wrong email format";
+                        lblEmailInfo.Visible = true;
+                    }
+                    else
+                    {
+                        query = "SELECT * FROM Users WHERE Email = '" + email + "'";
+                        sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+                        sqlDataAdapter.Fill(dataTable);
+                        if (dataTable.Rows.Count == 1) /// Email is already used
                         {
-                            lblEmailInfo.Text = "Wrong email format";
+                            lblEmailInfo.Text = "Email is already used";
                             lblEmailInfo.Visible = true;
                         }
-                        else
-                        {
-                            query = "SELECT * FROM Users WHERE Email = '" + email + "'";
-                            sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-                            sqlDataAdapter.Fill(dataTable);
-                            if (dataTable.Rows.Count == 1) /// Email is already used
-                            {
-                                lblEmailInfo.Text = "Email is already used";
-                                lblEmailInfo.Visible = true;
-                            }
-                        }
+                    }
 
-                        ///Checking Username
-                        string username = txtNick.Text.Trim();
-                        if (username.Length < 5) /// Too short username
+                    ///Checking Username
+                    string username = txtNick.Text.Trim();
+                    if (username.Length < 5) /// Too short username
+                    {
+                        lblUserInfo.Text = "Username has to be minimum 4 characters long";
+                        lblUserInfo.Visible = true;
+                    }
+                    else if (!StringCorrect.CheckCorrect(username, 47, 58, 64, 91, 96, 123))
+                    {
+                        lblUserInfo.Text = "Username can contains only characters A-Z, a-z, 0-9";
+                        lblUserInfo.Visible = true;
+                    }
+                    else
+                    {
+                        query = "SELECT * FROM Users WHERE Nickname = '" + txtNick.Text.Trim() + "'";
+                        sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+                        dataTable.Clear();
+                        sqlDataAdapter.Fill(dataTable);
+                        if (dataTable.Rows.Count == 1) /// Username is already used
                         {
-                            lblUserInfo.Text = "Username has to be minimum 4 characters long";
+                            lblUserInfo.Text = "Username is already used";
                             lblUserInfo.Visible = true;
-                        }
-                        else if (!StringCorrect.CheckCorrect(username, 47, 58, 64, 91, 96, 123))
-                        {
-                            lblUserInfo.Text = "Username can contains only characters A-Z, a-z, 0-9";
-                            lblUserInfo.Visible = true;
-                        }
-                        else
-                        {
-                            query = "SELECT * FROM Users WHERE Nickname = '" + txtNick.Text.Trim() + "'";
-                            sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
-                            dataTable.Clear();
-                            sqlDataAdapter.Fill(dataTable);
-                            if (dataTable.Rows.Count == 1) /// Username is already used
-                            {
-                                lblUserInfo.Text = "Username is already used";
-                                lblUserInfo.Visible = true;
-                            }
-                        }
-
-                        ///Checking Password
-                        string password = txtPass.Text.Trim(), passwordConfirm = txtRepPass.Text.Trim();
-                        if (password != passwordConfirm) /// passwords aren't the same
-                        {
-                            lblPassInfo.Text = "Passwords aren't the same";
-                            lblPassInfo.Visible = true;
-                        }
-                        else if (password.Length < 6) /// passwod is too short
-                        {
-                            lblPassInfo.Text = "Password has to be 6 characters long";
-                            lblPassInfo.Visible = true;
-                        }
-                        else if (!StringCorrect.CheckCorrect(password, 32, 128))
-                        {
-                            lblPassInfo.Text = "Password contains unacceptable characters";
-                            lblPassInfo.Visible = true;
-                        }
-
-                        if (lblEmailInfo.Visible == false && lblUserInfo.Visible == false && lblPassInfo.Visible == false) /// All inputs are correct, adding user to data
-                        {
-                            sqlConnection.Open();
-                            SqlCommand sqlCommand = new SqlCommand("AddUser", sqlConnection)
-                            {
-                                CommandType = CommandType.StoredProcedure
-                            };
-                            sqlCommand.Parameters.AddWithValue("@Email", email);
-                            sqlCommand.Parameters.AddWithValue("@Password", password);
-                            sqlCommand.Parameters.AddWithValue("@Nickname", username);
-                            sqlCommand.ExecuteNonQuery();
-                            sqlConnection.Close();
-                            if (MessageBox.Show("Would You like to log in now?", "Registration completed", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) /// Log in automaticly after registration
-                            {
-                                sqlDataAdapter = new SqlDataAdapter("SELECT * FROM Users WHERE Nickname = '" + username + "'", sqlConnection);
-                                sqlDataAdapter.Fill(dataTable);
-                                X.IdUser = dataTable.Rows[0].Field<int>("IdUsers");
-                                Hide();
-                                Main main = new Main();
-                                main.ShowDialog();
-                                Close();
-                            }
-                            else /// Don't log in after registration
-                            {
-                                txtEmail.Text = txtNick.Text = txtPass.Text = txtRepPass.Text = "";
-                            }
-;
                         }
                     }
+
+                    ///Checking Password
+                    string password = txtPass.Text.Trim(), passwordConfirm = txtRepPass.Text.Trim();
+                    if (password != passwordConfirm) /// passwords aren't the same
+                    {
+                        lblPassInfo.Text = "Passwords aren't the same";
+                        lblPassInfo.Visible = true;
+                    }
+                    else if (password.Length < 6) /// passwod is too short
+                    {
+                        lblPassInfo.Text = "Password has to be 6 characters long";
+                        lblPassInfo.Visible = true;
+                    }
+                    else if (!StringCorrect.CheckCorrect(password, 32, 128))
+                    {
+                        lblPassInfo.Text = "Password contains unacceptable characters";
+                        lblPassInfo.Visible = true;
+                    }
+
+                    if (lblEmailInfo.Visible == false && lblUserInfo.Visible == false && lblPassInfo.Visible == false) /// All inputs are correct, adding user to data
+                    {
+                        sqlConnection.Open();
+
+                        /// Add user to data
+                        SqlCommand sqlAddUserCMD = new SqlCommand("AddUser", sqlConnection)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        };
+                        sqlAddUserCMD.Parameters.AddWithValue("@Email", email);
+                        sqlAddUserCMD.Parameters.AddWithValue("@Password", password);
+                        sqlAddUserCMD.Parameters.AddWithValue("@Nickname", username);
+                        sqlAddUserCMD.ExecuteNonQuery();
+
+                        /// Get IdUser
+                        SqlCommand sqlFindIdCMD = new SqlCommand("select dbo.FindIdLogin(@Login, @Password", sqlConnection)
+                        {
+                            CommandType = CommandType.Text
+                        };
+                        sqlFindIdCMD.Parameters.Add(new SqlParameter("@Login", username));
+                        sqlFindIdCMD.Parameters.Add(new SqlParameter("@Password", password));
+                        int id = (int)sqlFindIdCMD.ExecuteScalar();
+
+                        /// Add users fridge data table
+                        SqlCommand sqlCreateFridgeCMD = new SqlCommand("CreateUserFridge", sqlConnection)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        };
+                        sqlCreateFridgeCMD.Parameters.AddWithValue("@TableName", id);
+                        sqlCreateFridgeCMD.ExecuteNonQuery();
+
+                        sqlConnection.Close();
+
+                        if (MessageBox.Show("Would You like to log in now?", "Registration completed", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) /// Log in automaticly after registration
+                        {
+
+                            X.IdUser = id;
+                            Hide();
+                            Main main = new Main();
+                            main.ShowDialog();
+                            Close();
+                        }
+                        else /// Don't log in after registration
+                        {
+                            txtEmail.Text = txtNick.Text = txtPass.Text = txtRepPass.Text = "";
+                        }
+;
+                    }
+                }
                 }
                 catch (Exception) /// Server connection problem
                 {
