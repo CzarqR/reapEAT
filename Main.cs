@@ -328,7 +328,7 @@ namespace reapEAT
             Label label = (sender as Label);
             Controls.Remove(label);
             labels.Remove(label);
-            pickedIngridients.Remove(FindKey(label.Text));
+            pickedIngridients.Remove(FindKey(pickedIngridients, label.Text));
             DisplayElements.ChangeLocation(labels, 30, 450, 25, 10);
         }
 
@@ -337,9 +337,9 @@ namespace reapEAT
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        private int FindKey(string value)
+        public static int FindKey(Dictionary<int, string> dic, string value)
         {
-            foreach (KeyValuePair<int, string> item in pickedIngridients)
+            foreach (KeyValuePair<int, string> item in dic)
             {
                 if (item.Value == value)
                     return item.Key;

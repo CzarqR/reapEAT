@@ -38,10 +38,22 @@
             this.butRemoveFood = new System.Windows.Forms.Button();
             this.butBarcode = new System.Windows.Forms.Button();
             this.butFind = new System.Windows.Forms.Button();
-            this.txtBarcode = new System.Windows.Forms.TextBox();
+            this.txtFoodToFind = new System.Windows.Forms.TextBox();
             this.datePickerExpirationDate = new System.Windows.Forms.DateTimePicker();
             this.txtComment = new System.Windows.Forms.TextBox();
             this.txtQuantity = new System.Windows.Forms.TextBox();
+            this.lblQuantity = new System.Windows.Forms.Label();
+            this.lblComment = new System.Windows.Forms.Label();
+            this.lblExpirationDate = new System.Windows.Forms.Label();
+            this.lblMeasure = new System.Windows.Forms.Label();
+            this.lblFoundFood = new System.Windows.Forms.Label();
+            this.butConfirm = new System.Windows.Forms.Button();
+            this.comBFoundFood = new System.Windows.Forms.ComboBox();
+            this.listVSameFood = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listVFridge
@@ -128,44 +140,160 @@
             this.butFind.TabIndex = 5;
             this.butFind.Text = "Find food";
             this.butFind.UseVisualStyleBackColor = true;
+            this.butFind.Click += new System.EventHandler(this.ButFind_Click);
             // 
-            // txtBarcode
+            // txtFoodToFind
             // 
-            this.txtBarcode.Location = new System.Drawing.Point(191, 199);
-            this.txtBarcode.Name = "txtBarcode";
-            this.txtBarcode.Size = new System.Drawing.Size(107, 20);
-            this.txtBarcode.TabIndex = 6;
+            this.txtFoodToFind.Location = new System.Drawing.Point(191, 221);
+            this.txtFoodToFind.Name = "txtFoodToFind";
+            this.txtFoodToFind.Size = new System.Drawing.Size(100, 20);
+            this.txtFoodToFind.TabIndex = 6;
+            this.txtFoodToFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBarcode_KeyPress);
             // 
             // datePickerExpirationDate
             // 
-            this.datePickerExpirationDate.Location = new System.Drawing.Point(313, 199);
+            this.datePickerExpirationDate.Checked = false;
+            this.datePickerExpirationDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datePickerExpirationDate.Location = new System.Drawing.Point(391, 261);
             this.datePickerExpirationDate.Name = "datePickerExpirationDate";
-            this.datePickerExpirationDate.Size = new System.Drawing.Size(212, 20);
+            this.datePickerExpirationDate.ShowCheckBox = true;
+            this.datePickerExpirationDate.Size = new System.Drawing.Size(113, 20);
             this.datePickerExpirationDate.TabIndex = 7;
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(541, 201);
+            this.txtComment.Location = new System.Drawing.Point(358, 235);
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(111, 20);
+            this.txtComment.Size = new System.Drawing.Size(146, 20);
             this.txtComment.TabIndex = 8;
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(669, 201);
+            this.txtQuantity.Location = new System.Drawing.Point(358, 209);
             this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(106, 20);
+            this.txtQuantity.Size = new System.Drawing.Size(81, 20);
             this.txtQuantity.TabIndex = 9;
+            // 
+            // lblQuantity
+            // 
+            this.lblQuantity.AutoSize = true;
+            this.lblQuantity.Location = new System.Drawing.Point(303, 212);
+            this.lblQuantity.Name = "lblQuantity";
+            this.lblQuantity.Size = new System.Drawing.Size(49, 13);
+            this.lblQuantity.TabIndex = 10;
+            this.lblQuantity.Text = "Quantity:";
+            // 
+            // lblComment
+            // 
+            this.lblComment.AutoSize = true;
+            this.lblComment.Location = new System.Drawing.Point(303, 238);
+            this.lblComment.Name = "lblComment";
+            this.lblComment.Size = new System.Drawing.Size(54, 13);
+            this.lblComment.TabIndex = 11;
+            this.lblComment.Text = "Comment:";
+            // 
+            // lblExpirationDate
+            // 
+            this.lblExpirationDate.AutoSize = true;
+            this.lblExpirationDate.Location = new System.Drawing.Point(303, 266);
+            this.lblExpirationDate.Name = "lblExpirationDate";
+            this.lblExpirationDate.Size = new System.Drawing.Size(82, 13);
+            this.lblExpirationDate.TabIndex = 12;
+            this.lblExpirationDate.Text = "Expiration Date:";
+            // 
+            // lblMeasure
+            // 
+            this.lblMeasure.AutoSize = true;
+            this.lblMeasure.Location = new System.Drawing.Point(445, 212);
+            this.lblMeasure.Name = "lblMeasure";
+            this.lblMeasure.Size = new System.Drawing.Size(48, 13);
+            this.lblMeasure.TabIndex = 13;
+            this.lblMeasure.Text = "Measure";
+            // 
+            // lblFoundFood
+            // 
+            this.lblFoundFood.AutoSize = true;
+            this.lblFoundFood.Location = new System.Drawing.Point(303, 189);
+            this.lblFoundFood.Name = "lblFoundFood";
+            this.lblFoundFood.Size = new System.Drawing.Size(64, 13);
+            this.lblFoundFood.TabIndex = 14;
+            this.lblFoundFood.Text = "Found Food";
+            // 
+            // butConfirm
+            // 
+            this.butConfirm.Location = new System.Drawing.Point(520, 216);
+            this.butConfirm.Name = "butConfirm";
+            this.butConfirm.Size = new System.Drawing.Size(88, 28);
+            this.butConfirm.TabIndex = 15;
+            this.butConfirm.Text = "Confirm";
+            this.butConfirm.UseVisualStyleBackColor = true;
+            this.butConfirm.Click += new System.EventHandler(this.ButConfirm_Click);
+            // 
+            // comBFoundFood
+            // 
+            this.comBFoundFood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBFoundFood.FormattingEnabled = true;
+            this.comBFoundFood.Location = new System.Drawing.Point(372, 182);
+            this.comBFoundFood.Name = "comBFoundFood";
+            this.comBFoundFood.Size = new System.Drawing.Size(132, 21);
+            this.comBFoundFood.TabIndex = 17;
+            this.comBFoundFood.SelectedIndexChanged += new System.EventHandler(this.ComBFoundFood_SelectedIndexChanged);
+            // 
+            // listVSameFood
+            // 
+            this.listVSameFood.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listVSameFood.FullRowSelect = true;
+            this.listVSameFood.HideSelection = false;
+            this.listVSameFood.Location = new System.Drawing.Point(306, 306);
+            this.listVSameFood.Name = "listVSameFood";
+            this.listVSameFood.Size = new System.Drawing.Size(373, 97);
+            this.listVSameFood.TabIndex = 18;
+            this.listVSameFood.UseCompatibleStateImageBehavior = false;
+            this.listVSameFood.View = System.Windows.Forms.View.Details;
+            this.listVSameFood.DoubleClick += new System.EventHandler(this.ListVSameFood_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Quantity";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Comment";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 140;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Expiration Date";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 84;
             // 
             // Fridge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listVSameFood);
+            this.Controls.Add(this.comBFoundFood);
+            this.Controls.Add(this.butConfirm);
+            this.Controls.Add(this.lblFoundFood);
+            this.Controls.Add(this.lblMeasure);
+            this.Controls.Add(this.lblExpirationDate);
+            this.Controls.Add(this.lblComment);
+            this.Controls.Add(this.lblQuantity);
             this.Controls.Add(this.txtQuantity);
             this.Controls.Add(this.txtComment);
             this.Controls.Add(this.datePickerExpirationDate);
-            this.Controls.Add(this.txtBarcode);
+            this.Controls.Add(this.txtFoodToFind);
             this.Controls.Add(this.butFind);
             this.Controls.Add(this.butBarcode);
             this.Controls.Add(this.butRemoveFood);
@@ -191,9 +319,21 @@
         private System.Windows.Forms.Button butRemoveFood;
         private System.Windows.Forms.Button butBarcode;
         private System.Windows.Forms.Button butFind;
-        private System.Windows.Forms.TextBox txtBarcode;
+        private System.Windows.Forms.TextBox txtFoodToFind;
         private System.Windows.Forms.DateTimePicker datePickerExpirationDate;
         private System.Windows.Forms.TextBox txtComment;
         private System.Windows.Forms.TextBox txtQuantity;
+        private System.Windows.Forms.Label lblQuantity;
+        private System.Windows.Forms.Label lblComment;
+        private System.Windows.Forms.Label lblExpirationDate;
+        private System.Windows.Forms.Label lblMeasure;
+        private System.Windows.Forms.Label lblFoundFood;
+        private System.Windows.Forms.Button butConfirm;
+        private System.Windows.Forms.ComboBox comBFoundFood;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ListView listVSameFood;
     }
 }
