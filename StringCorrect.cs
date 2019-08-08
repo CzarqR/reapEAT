@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,7 +55,53 @@ namespace reapEAT
             return stringBuilder.ToString();
         }
 
-        
+        /// <summary>
+        /// from string in format "dd.mm.yyyy" get DateTime
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        public static DateTime GetDateTimeFromString(string x)
+        {
+            return new DateTime(int.Parse(x.Substring(6)), int.Parse(x.Substring(3, 2)), int.Parse(x.Substring(0, 2)));
+        }
+
+        public static string LoadFoodFromFridge(int id)
+        {
+            StringBuilder food = new StringBuilder(" ");
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                string Q = "SELECT IdFood FROM [" + id + "_fridge] ORDER BY IdFood";
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(Q, sqlConnection);
+                DataTable dataTable = new DataTable();
+                sqlDataAdapter.Fill(dataTable);
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    food.Append(row.Field<int>("IdFood").ToString());
+                    food.Append(" ");
+                }
+            }
+            return food.ToString();
+        }
+
+        public static bool CheckIngredients(string r, string f)
+        {
+            int start = 0, stop;
+
+            for (int i = 0; i < 10000; i++)
+            {
+                while (start < r.Length - 1)
+                {
+
+                    stop = (r.IndexOf(" ", start + 1));
+                    if (f.IndexOf(r.Substring(start, stop - start)) == -1)
+                        return false;
+                        start = stop;
+
+                }
+            }
+            
+            return true;
+        }
     }
 
 }

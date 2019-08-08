@@ -29,7 +29,7 @@ namespace reapEAT
         private string sqlTimeQuery = "";
         private string sqlDietQuery = "";
         private readonly Dictionary<int, string> pickedIngridients = new Dictionary<int, string>();
-        private List<Label> labels = new List<Label>();
+        private readonly List<Label> labels = new List<Label>();
 
 
 

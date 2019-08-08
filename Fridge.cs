@@ -17,20 +17,26 @@ namespace reapEAT
 
         private readonly DataTable dataTableFridge = new DataTable();
         private readonly DataTable dataTableFoundFood = new DataTable();
-        private DataTable dataTableSameInFridge = new DataTable();
-        Dictionary<int, string> IdAndName = new Dictionary<int, string>();
-        private string queryFridge = "SELECT Food.Name, ISNULL([" + X.IdUser + "_fridge].QuantityInFridge,'0') AS 'QuantityInFridge' , ISNULL([" + X.IdUser + "_fridge].ProductInfo,'-') AS 'ProductInfo', ISNULL([" + X.IdUser + "_fridge].ExpirationDate,'0001-01-01') AS 'ExpirationDate' , [" + X.IdUser + "_fridge].IdItemInFridge " + "FROM [" + X.IdUser + "_fridge], Food where [" + X.IdUser + "_fridge].IdFood = food.IdFood";
+        private readonly DataTable dataTableSameInFridge = new DataTable();
+        //readonly Dictionary<int, string> IdAndName = new Dictionary<int, string>();
+        private readonly string queryFridge = "SELECT Food.Name, ISNULL([" + X.IdUser + "_fridge].QuantityInFridge,'0') AS 'QuantityInFridge' , ISNULL([" + X.IdUser + "_fridge].ProductInfo,'-') AS 'ProductInfo', ISNULL([" + X.IdUser + "_fridge].ExpirationDate,'3000-01-01') AS 'ExpirationDate' , [" + X.IdUser + "_fridge].IdItemInFridge , Measure.Measure AS 'Mea' " + "FROM [" + X.IdUser + "_fridge], Food, Measure where [" + X.IdUser + "_fridge].IdFood = food.IdFood AND Measure.IdMeasure = Food.Measure";
 
 
+        /// strings to add new food to fridge
         private string quantity;
         private string comment;
         private string date;
+        private bool typeFind;
+        private Byte actualSortedColumn = 255;
+
 
 
         public Fridge()
         {
             InitializeComponent();
             LoadDBToListView(queryFridge);
+            datePickerExpirationDate.Value = DateTime.Today;
+
         }
 
         private void ButTest_Click(object sender, EventArgs e)
@@ -58,20 +64,29 @@ namespace reapEAT
                 sqlDataAdapter.Fill(dataTableFridge);
                 foreach (DataRow row in dataTableFridge.Rows)
                 {
-                    ListViewItem item = new ListViewItem(row.Field<string>("Name"));
+                    ListViewItem item = new ListViewItem(row.Field<string>("Name"));// 0 Name
 
-                    if (row.Field<double>("QuantityInFridge") == 0)
+                    if (row.Field<double>("QuantityInFridge") == 0)// 1 Quantity with measure !!!! TO DO  !!!! 
                         item.SubItems.Add("-");
                     else
-                        item.SubItems.Add(row.Field<double>("QuantityInFridge").ToString());
+                        item.SubItems.Add(row.Field<double>("QuantityInFridge").ToString() + " " + row.Field<string>("Mea").ToString().Substring(0,1).ToLower() + ".");
 
-                    item.SubItems.Add(row.Field<string>("ProductInfo").ToString());
-
-                    if (row.Field<DateTime>("ExpirationDate").ToShortDateString() == "01.01.0001")
+                    item.SubItems.Add(row.Field<string>("ProductInfo").ToString());// 2 Comment 
+                    if (row.Field<DateTime>("ExpirationDate").ToShortDateString() == "01.01.3000")// 3 Exp date with null
                         item.SubItems.Add("-");
                     else
                         item.SubItems.Add(row.Field<DateTime>("ExpirationDate").ToShortDateString());
-                    item.SubItems.Add(row.Field<int>("IdItemInFridge").ToString());
+
+                    item.SubItems.Add(row.Field<int>("IdItemInFridge").ToString());// 4 IdFood
+
+                    item.SubItems.Add(row.Field<string>("Mea").ToString());// 5 Measure IdFood
+
+                    item.SubItems.Add(row.Field<double>("QuantityInFridge").ToString());// 6 Quantity 
+
+                    item.SubItems.Add(row.Field<DateTime>("ExpirationDate").ToShortDateString());// 7 Date
+
+
+
 
                     listVFridge.Items.Add(item);
 
@@ -122,7 +137,7 @@ namespace reapEAT
             {
                 try
                 {
-                    quantity = (double.Parse(txtQuantity.Text.ToString().Replace('.',','))).ToString();
+                    quantity = (double.Parse(txtQuantity.Text.ToString().Replace('.', ','))).ToString();
 
                 }
                 catch (Exception) /// wrong Quantity in textbox
@@ -170,10 +185,9 @@ namespace reapEAT
 
             if (dataTableSameInFridge.Rows.Count == 0) /// no food in fridge with id like food to add
             {
-                Console.WriteLine("NO");
                 using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
                 {
-                    string Q = "INSERT INTO [" + X.IdUser + "_fridge](IdFood, QuantityInFridge, ExpirationDate, ProductInfo ) VALUES(" + dataTableFoundFood.Rows[comBFoundFood.SelectedIndex].Field<int>("IdFood") + ",  " + quantity + "  , " + date + " ," + comment + ")";
+                    string Q = "INSERT INTO [" + X.IdUser + "_fridge](IdFood, QuantityInFridge, ExpirationDate, ProductInfo ) VALUES(" + dataTableFoundFood.Rows[comBFoundFood.SelectedIndex].Field<int>("IdFood") + ",  " + quantity.Replace(',', '.') + "  , " + date + " ," + comment + ")";
 
                     SqlCommand sqlAddFoodToFridge = new SqlCommand(Q, sqlConnection)
                     {
@@ -195,38 +209,48 @@ namespace reapEAT
 
         private void SearchFood()
         {
-            IdAndName.Clear();
+            comBFoundFood.Items.Clear();
+            dataTableFoundFood.Clear();
+            //IdAndName.Clear();
             if (txtFoodToFind.Text.Length > 0)
             {
-                if (StringCorrect.CheckCorrect(txtFoodToFind.Text, 47, 58))/// Barcode
+                string query;
+                if (StringCorrect.CheckCorrect(txtFoodToFind.Text, 47, 58)) /// Barcode
                 {
-                    comBFoundFood.Items.Clear();
-                    dataTableFoundFood.Clear();
-                    using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
-                    {
-                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select Barcode.IdFood, Food.Name, Barcode.ProductInfo, Barcode.Size, Food.Measure, Barcode.Size, Measure.Measure AS 'Mea' from Barcode, Food, Measure where Barcode.IdFood = Food.IdFood AND Measure.IdMeasure = Food.Measure AND Barcode.Barcode = " + txtFoodToFind.Text.ToString(), sqlConnection);
-                        sqlDataAdapter.Fill(dataTableFoundFood);
-                    }
-                    foreach (DataRow row in dataTableFoundFood.Rows)
-                    {
-                        comBFoundFood.Items.Add(row.Field<string>("Name"));
-                    }
-                    ChangeFoodComboBox(0);
-
+                    typeFind = true;
+                    query = "Select Barcode.IdFood, Food.Name, Barcode.ProductInfo, Barcode.Size, Food.Measure, Barcode.Size, Measure.Measure AS 'Mea' from Barcode, Food, Measure where Barcode.IdFood = Food.IdFood AND Measure.IdMeasure = Food.Measure AND Barcode.Barcode = " + txtFoodToFind.Text.ToString();
                 }
 
-
-                else /// Food name
+                else /// Name
                 {
+                    typeFind = false;
+                    query = "select IdFood, Name, Measure.Measure AS 'Mea' from Food, Measure where Measure.IdMeasure = Food.Measure AND Name like '%" + txtFoodToFind.Text.ToString() + "%'";
+                }
 
+                using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+                {
+                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+                    sqlDataAdapter.Fill(dataTableFoundFood);
+                }
+                foreach (DataRow row in dataTableFoundFood.Rows)
+                {
+                    comBFoundFood.Items.Add(row.Field<string>("Name"));
+                }
+
+                if (comBFoundFood.Items.Count > 0) // at least one food was found
+                {
+                    ChangeFoodComboBox(0);
                 }
             }
         }
 
         private void ChangeFoodComboBox(int index)
         {
-            txtQuantity.Text = dataTableFoundFood.Rows[index].Field<double>("Size").ToString();
-            txtComment.Text = dataTableFoundFood.Rows[index].Field<string>("ProductInfo");
+            if (typeFind) /// change when its barcode
+            {
+                txtQuantity.Text = dataTableFoundFood.Rows[index].Field<double>("Size").ToString();
+                txtComment.Text = dataTableFoundFood.Rows[index].Field<string>("ProductInfo");
+            }
             lblMeasure.Text = dataTableFoundFood.Rows[index].Field<string>("Mea");
             comBFoundFood.SelectedIndex = index;
         }
@@ -268,10 +292,10 @@ namespace reapEAT
 
         private void ListVSameFood_DoubleClick(object sender, EventArgs e)
         {
-            if (listVSameFood.SelectedItems[0].SubItems[1].Text != "-")
+            if (listVSameFood.SelectedItems[0].SubItems[6].Text != "-")
             {
                 Console.WriteLine("in");
-                quantity = ((double.Parse(listVSameFood.SelectedItems[0].SubItems[1].Text) + double.Parse(quantity)).ToString()).Replace(',', '.');
+                quantity = ((double.Parse(listVSameFood.SelectedItems[0].SubItems[6].Text) + double.Parse(quantity)).ToString()).Replace(',', '.');
             }
             else
             {
@@ -295,6 +319,227 @@ namespace reapEAT
             }
             LoadDBToListView(queryFridge);
 
+        }
+
+        private void ListVFridge_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (listVFridge.SelectedItems.Count == 0)
+            {
+                butEditFood.Enabled = false;
+                butDeleteFood.Enabled = false;
+            }
+            else if (listVFridge.SelectedItems.Count == 1)
+            {
+                butEditFood.Enabled = true;
+                butDeleteFood.Enabled = true;
+            }
+            else
+            {
+                butEditFood.Enabled = false;
+                butDeleteFood.Enabled = true;
+            }
+        }
+
+        private void DeleteFood()
+        {
+            foreach (ListViewItem item in listVFridge.SelectedItems)
+            {
+                string query = "DELETE FROM [" + X.IdUser + "_fridge] WHERE IdItemInFridge = " + item.SubItems[4].Text;
+                using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+                {
+                    SqlCommand sqlAddFoodToFridge = new SqlCommand(query, sqlConnection)
+                    {
+                        CommandType = CommandType.Text
+                    };
+                    sqlConnection.Open();
+                    sqlAddFoodToFridge.ExecuteNonQuery();
+                    sqlConnection.Close();
+                }
+            }
+            LoadDBToListView(queryFridge);
+        }
+
+        private void ButDeleteFood_Click(object sender, EventArgs e)
+        {
+            DeleteFood();
+        }
+
+        private void ButJustAdd_Click(object sender, EventArgs e)
+        {
+            if (comBFoundFood.Items.Count == 0)
+            {
+                return;
+            }
+
+            /// Data input validation
+
+            /// Quantity
+            if (txtQuantity.Text.Length > 0)
+            {
+                try
+                {
+                    quantity = (double.Parse(txtQuantity.Text.ToString().Replace('.', ','))).ToString();
+
+                }
+                catch (Exception) /// wrong Quantity in textbox
+                {
+                    return;
+                }
+            }
+            else
+            {
+                quantity = "NULL";
+            }
+
+
+            /// Date
+
+            if (datePickerExpirationDate.Checked)
+            {
+                date = "'" + datePickerExpirationDate.Value.ToString("yyyy-MM-dd") + "'";
+            }
+            else
+            {
+                date = "NULL";
+            }
+
+            ///Comment
+
+            if (txtComment.Text.Length > 0)
+            {
+                comment = "'" + txtComment.Text.ToString() + "'";
+            }
+            else
+            {
+                comment = "NULL";
+            }
+
+            /// Adding food
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                string Q = "INSERT INTO [" + X.IdUser + "_fridge](IdFood, QuantityInFridge, ExpirationDate, ProductInfo ) VALUES(" + dataTableFoundFood.Rows[comBFoundFood.SelectedIndex].Field<int>("IdFood") + ",  " + quantity.Replace(',', '.') + "  , " + date + " ," + comment + ")";
+
+                SqlCommand sqlAddFoodToFridge = new SqlCommand(Q, sqlConnection)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlConnection.Open();
+                sqlAddFoodToFridge.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            LoadDBToListView(queryFridge);
+
+        }
+
+        private void ButEditFood_Click(object sender, EventArgs e)
+        {
+            txtQuantity.Text = listVFridge.SelectedItems[0].SubItems[6].Text.ToString();
+            txtComment.Text = listVFridge.SelectedItems[0].SubItems[2].Text.ToString();
+            lblMeasure.Text = listVFridge.SelectedItems[0].SubItems[5].Text.ToString();
+            try
+            {
+                datePickerExpirationDate.Value = DateTime.Parse(listVFridge.SelectedItems[0].SubItems[3].Text.ToString());
+            }
+            catch (Exception)
+            {
+                datePickerExpirationDate.Value = DateTime.Today;
+                datePickerExpirationDate.Checked = false;
+            }
+        }
+
+        private void ButUpdate_Click(object sender, EventArgs e)
+        {
+            /// Quantity
+            if (txtQuantity.Text.Length > 0)
+            {
+                try
+                {
+                    quantity = (double.Parse(txtQuantity.Text.ToString().Replace('.', ','))).ToString();
+
+                }
+                catch (Exception) /// wrong Quantity in textbox
+                {
+                    return;
+                }
+            }
+            else
+            {
+                quantity = "NULL";
+            }
+
+
+            /// Date
+
+            if (datePickerExpirationDate.Checked)
+            {
+                date = "'" + datePickerExpirationDate.Value.ToString("yyyy-MM-dd") + "'";
+            }
+            else
+            {
+                date = "NULL";
+            }
+
+            ///Comment
+
+            if (txtComment.Text.Length > 0)
+            {
+                comment = "'" + txtComment.Text.ToString() + "'";
+            }
+            else
+            {
+                comment = "NULL";
+            }
+
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                string Q = "UPDATE [" + X.IdUser + "_fridge] SET QuantityInFridge = " + quantity + ", ExpirationDate = " + date + ", ProductInfo = " + comment + " WHERE IdItemInFridge = " + listVFridge.SelectedItems[0].SubItems[4].Text.ToString();
+                SqlCommand sqlUpdateFoodInFridge = new SqlCommand(Q, sqlConnection)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlConnection.Open();
+                sqlUpdateFoodInFridge.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            LoadDBToListView(queryFridge);
+        }
+
+        private void ListVFridge_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == actualSortedColumn)
+            {
+                if (e.Column == 0 || e.Column == 2)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewStringComparerDsc(e.Column);
+                }
+                else if (e.Column == 1)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDoubleComparerDsc(6);
+                }
+                else
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDateComparerDsc(7);
+                }
+                actualSortedColumn = 255;
+            }
+            else
+            {
+                if (e.Column == 0 || e.Column == 2)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewStringComparerAsc(e.Column);
+                }
+                else if (e.Column == 1)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDoubleComparerAsc(6);
+
+                }
+                else
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDateComparerAsc(7);
+
+                }
+                actualSortedColumn = (Byte)e.Column;
+            }
         }
     }
 }

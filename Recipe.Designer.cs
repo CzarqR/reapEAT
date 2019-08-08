@@ -39,7 +39,9 @@
             this.lblAuthor = new System.Windows.Forms.Label();
             this.lblStyle = new System.Windows.Forms.Label();
             this.lblDiet = new System.Windows.Forms.Label();
+            this.numPortion = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.picDish)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPortion)).BeginInit();
             this.SuspendLayout();
             // 
             // picDish
@@ -143,11 +145,35 @@
             this.lblDiet.TabIndex = 10;
             this.lblDiet.Text = "Diet";
             // 
+            // numPortion
+            // 
+            this.numPortion.Location = new System.Drawing.Point(58, 373);
+            this.numPortion.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numPortion.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numPortion.Name = "numPortion";
+            this.numPortion.Size = new System.Drawing.Size(40, 20);
+            this.numPortion.TabIndex = 11;
+            this.numPortion.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numPortion.ValueChanged += new System.EventHandler(this.NumPortion_ValueChanged);
+            // 
             // Recipe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 631);
+            this.Controls.Add(this.numPortion);
             this.Controls.Add(this.lblDiet);
             this.Controls.Add(this.lblStyle);
             this.Controls.Add(this.lblAuthor);
@@ -162,6 +188,7 @@
             this.Name = "Recipe";
             this.Text = "Recipe";
             ((System.ComponentModel.ISupportInitialize)(this.picDish)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPortion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +207,6 @@
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Label lblStyle;
         private System.Windows.Forms.Label lblDiet;
+        private System.Windows.Forms.NumericUpDown numPortion;
     }
 }

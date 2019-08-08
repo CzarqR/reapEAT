@@ -81,4 +81,75 @@ namespace reapEAT
         }
     }
 
+    class ListViewDoubleComparerAsc : IComparer
+    {
+        private readonly int column;
+        public ListViewDoubleComparerAsc()
+        {
+            column = 0;
+        }
+        public ListViewDoubleComparerAsc(int column)
+        {
+            this.column = column;
+        }
+        public int Compare(object x, object y)
+        {
+
+            return (int.Parse(((ListViewItem)x).SubItems[column].Text)).CompareTo((int.Parse(((ListViewItem)y).SubItems[column].Text)));
+        }
+    }
+
+    class ListViewDoubleComparerDsc : IComparer
+    {
+        private readonly int column;
+        public ListViewDoubleComparerDsc()
+        {
+            column = 0;
+        }
+        public ListViewDoubleComparerDsc(int column)
+        {
+            this.column = column;
+        }
+        public int Compare(object x, object y)
+        {
+            return (double.Parse(((ListViewItem)y).SubItems[column].Text)).CompareTo((double.Parse(((ListViewItem)x).SubItems[column].Text)));
+        }
+    }
+
+    class ListViewDateComparerAsc : IComparer
+    {
+        private readonly int column;
+        public ListViewDateComparerAsc()
+        {
+            column = 0;
+        }
+        public ListViewDateComparerAsc(int column)
+        {
+            this.column = column;
+        }
+        public int Compare(object x, object y)
+        {
+
+            return (DateTime.Parse(((ListViewItem)x).SubItems[column].Text)).CompareTo((DateTime.Parse(((ListViewItem)y).SubItems[column].Text)));
+        }
+    }
+
+    class ListViewDateComparerDsc : IComparer
+    {
+        private readonly int column;
+        public ListViewDateComparerDsc()
+        {
+            column = 0;
+        }
+        public ListViewDateComparerDsc(int column)
+        {
+            this.column = column;
+        }
+        public int Compare(object x, object y)
+        {
+            return (DateTime.Parse(((ListViewItem)y).SubItems[column].Text)).CompareTo((DateTime.Parse(((ListViewItem)x).SubItems[column].Text)));
+        }
+    }
+
+
 }

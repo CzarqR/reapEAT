@@ -13,11 +13,17 @@ namespace reapEAT
 {
     public partial class Recipe : Form
     {
-        private List<Label> labels = new List<Label>();
-
+        private List<Label> labelsIngRec = new List<Label>();
+        private List<Label> labelsIngFrid = new List<Label>();
+        private int idRecipe;
+        private int portion;
+        private bool firstLoad = false; //turn off value change event when form is loaded for the first time
+        DataTable dataTableRecice = new DataTable();
+        DataTable dataTableFidge = new DataTable();
 
         public Recipe(int idRecipe)
         {
+            this.idRecipe = idRecipe;
             InitializeComponent();
             try
             {
@@ -27,13 +33,15 @@ namespace reapEAT
             {
                 // No image
             }
+            LoadDBToTB(idRecipe);
 
             LoadRecipe(idRecipe);
             lblRecipe.MaximumSize = new Size(250, 0);
 
             LoadIngredients(idRecipe);
 
-            DisplayElements.DisplayAll(labels, this, 300, 400, 0, 25);
+            DisplayElements.DisplayAll(labelsIngRec, this, 300, 400, 0, 25);
+            DisplayElements.DisplayAll(labelsIngFrid, this, 450, 400, 0, 25);
 
 
         }
@@ -56,7 +64,9 @@ namespace reapEAT
 
                 lblTime.Text = (dataTable.Rows[0].Field<Int16>("Time") / 60 != 0 ? dataTable.Rows[0].Field<Int16>("Time") / 60 + " h " : "") + (dataTable.Rows[0].Field<Int16>("Time") % 60 != 0 ? dataTable.Rows[0].Field<Int16>("Time") % 60 + " m" : "");
 
-                lblPortion.Text = dataTable.Rows[0].Field<byte>("Portion").ToString();
+                //lblPortion.Text = dataTable.Rows[0].Field<byte>("Portion").ToString();
+                numPortion.Value = dataTable.Rows[0].Field<byte>("Portion");
+                portion = dataTable.Rows[0].Field<byte>("Portion");
                 lblFav.Text = dataTable.Rows[0].Field<int>("Favourites").ToString();
 
             }
@@ -64,25 +74,96 @@ namespace reapEAT
 
         private void LoadIngredients(int id)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            foreach (Label label in labelsIngRec)
             {
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select Food.Name, [" + id + "_recipe].Quantity, Food.Measure  from [" + id + "_recipe], Food where [" + id + "_recipe].IdFood = Food.IdFood", sqlConnection);
-                DataTable dataTable = new DataTable();
-                sqlDataAdapter.Fill(dataTable);
-                foreach (DataRow row in dataTable.Rows)
+                Controls.Remove(label);
+            }
+            labelsIngRec.Clear();
+
+            foreach (Label label in labelsIngFrid)
+            {
+                Controls.Remove(label);
+            }
+            labelsIngFrid.Clear();
+
+
+
+            double scalar = ((double)numPortion.Value / portion);
+            foreach (DataRow row in dataTableRecice.Rows)
+            {
+
+                Label label = new Label
                 {
-                    Label label = new Label
-                    {
-                        Text = row.Field<string>("Name") + "  -  " + row.Field<double>("Quantity") +"  "  +(row.Field<string>("Measure") == "G"? (row.Field<double>("Quantity") == 1 ? "Gram" : "Grams")  : (row.Field<double>("Quantity") == 1 ? "Milliliter" : "Millilitres") ),
+                    Text = row.Field<string>("Name") + "  -  " + row.Field<double>("Quantity") * scalar + "  " + (row.Field<byte>("Measure") == 0 ? (row.Field<double>("Quantity") * scalar == 1 ? "Gram" : "Grams") : (row.Field<double>("Quantity") * scalar == 1 ? "Milliliter" : "Millilitres")),
+
+                    AutoSize = true
+                };
+
+                labelsIngRec.Add(label);
+
+                double difference = FindQuantityInFridgeBy(row.Field<int>("IdFood"), (row.Field<double>("Quantity") * scalar));
+
+                Label label1 = new Label
+                {
+                    Text = difference.ToString(),
+                    ForeColor = (difference >= 0) ? (Color.Green) : (Color.Red),
 
 
-                        AutoSize = true
-                    };
-
-
-                    labels.Add(label);
-                }
+                    AutoSize = true
+                };
+                labelsIngFrid.Add(label1);
             }
         }
+
+        private void NumPortion_ValueChanged(object sender, EventArgs e)
+        {
+            if (firstLoad)
+            {
+                LoadIngredients(idRecipe);
+                DisplayElements.DisplayAll(labelsIngRec, this, 300, 400, 0, 25);
+                DisplayElements.DisplayAll(labelsIngFrid, this, 450, 400, 0, 25);
+            }
+            firstLoad = true;
+        }
+
+        private double FindQuantityInFridgeBy(int id, double InRecipe)
+        {
+            double count = 0;
+            foreach (DataRow row in dataTableFidge.Rows)
+            {
+                if (row.Field<int>("IdFood") == id)
+                {
+                    try
+                    {
+                        count += row.Field<double>("QuantityInFridge");
+
+                    }
+                    catch (Exception)
+                    {
+                        return double.PositiveInfinity;
+                    }
+                }
+            }
+            return (count - InRecipe);
+        }
+
+        private void LoadDBToTB(int id)
+        {
+            /// Ingeredients from recipe
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select Food.Name, [" + id + "_recipe].Quantity, Food.Measure, Food.IdFood  from [" + id + "_recipe], Food where [" + id + "_recipe].IdFood = Food.IdFood", sqlConnection);
+
+                sqlDataAdapter.Fill(dataTableRecice);
+            }
+
+            /// Ingredients from fridge
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT IdFood, QuantityInFridge from [" + X.IdUser + "_fridge]", sqlConnection);
+                sqlDataAdapter.Fill(dataTableFidge);
+            }
+        }
+
     }
 }
