@@ -13,17 +13,16 @@ namespace reapEAT
 {
     public partial class Recipe : Form
     {
-        private List<Label> labelsIngRec = new List<Label>();
-        private List<Label> labelsIngFrid = new List<Label>();
-        private int idRecipe;
-        private int portion;
+        private readonly List<Label> labelsIngRec = new List<Label>();
+        private readonly List<Label> labelsIngFrid = new List<Label>();
+        private double portion;
         private bool firstLoad = false; //turn off value change event when form is loaded for the first time
-        DataTable dataTableRecice = new DataTable();
-        DataTable dataTableFidge = new DataTable();
+        readonly DataTable dataTableRecice = new DataTable();
+        readonly DataTable dataTableFidge = new DataTable();
 
-        public Recipe(int idRecipe)
+        public Recipe(int idRecipe, double portion = 0)
         {
-            this.idRecipe = idRecipe;
+            this.portion = portion;
             InitializeComponent();
             try
             {
@@ -38,10 +37,10 @@ namespace reapEAT
             LoadRecipe(idRecipe);
             lblRecipe.MaximumSize = new Size(250, 0);
 
-            LoadIngredients(idRecipe);
+            LoadIngredients();
 
             DisplayElements.DisplayAll(labelsIngRec, this, 300, 400, 0, 25);
-            DisplayElements.DisplayAll(labelsIngFrid, this, 450, 400, 0, 25);
+            DisplayElements.DisplayAll(labelsIngFrid, this, 475, 400, 0, 25);
 
 
         }
@@ -66,13 +65,16 @@ namespace reapEAT
 
                 //lblPortion.Text = dataTable.Rows[0].Field<byte>("Portion").ToString();
                 numPortion.Value = dataTable.Rows[0].Field<byte>("Portion");
-                portion = dataTable.Rows[0].Field<byte>("Portion");
+                if (portion == 0)
+                {
+                    portion = dataTable.Rows[0].Field<byte>("Portion");
+                }
                 lblFav.Text = dataTable.Rows[0].Field<int>("Favourites").ToString();
 
             }
         }
 
-        private void LoadIngredients(int id)
+        private void LoadIngredients()
         {
             foreach (Label label in labelsIngRec)
             {
@@ -94,14 +96,14 @@ namespace reapEAT
 
                 Label label = new Label
                 {
-                    Text = row.Field<string>("Name") + "  -  " + row.Field<double>("Quantity") * scalar + "  " + (row.Field<byte>("Measure") == 0 ? (row.Field<double>("Quantity") * scalar == 1 ? "Gram" : "Grams") : (row.Field<double>("Quantity") * scalar == 1 ? "Milliliter" : "Millilitres")),
+                    Text = row.Field<string>("Name") + "  -  " + Math.Round(row.Field<double>("Quantity") * scalar, 2) + "  " + (row.Field<byte>("Measure") == 0 ? (row.Field<double>("Quantity") * scalar == 1 ? "Gram" : "Grams") : (row.Field<double>("Quantity") * scalar == 1 ? "Milliliter" : "Millilitres")),
 
                     AutoSize = true
                 };
 
                 labelsIngRec.Add(label);
 
-                double difference = FindQuantityInFridgeBy(row.Field<int>("IdFood"), (row.Field<double>("Quantity") * scalar));
+                double difference = Math.Round(FindQuantityInFridgeBy(row.Field<int>("IdFood"), (row.Field<double>("Quantity") * scalar)), 2);
 
                 Label label1 = new Label
                 {
@@ -119,9 +121,9 @@ namespace reapEAT
         {
             if (firstLoad)
             {
-                LoadIngredients(idRecipe);
+                LoadIngredients();
                 DisplayElements.DisplayAll(labelsIngRec, this, 300, 400, 0, 25);
-                DisplayElements.DisplayAll(labelsIngFrid, this, 450, 400, 0, 25);
+                DisplayElements.DisplayAll(labelsIngFrid, this, 475, 400, 0, 25);
             }
             firstLoad = true;
         }

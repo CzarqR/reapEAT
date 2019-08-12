@@ -147,6 +147,12 @@
             // 
             // numPortion
             // 
+            this.numPortion.DecimalPlaces = 2;
+            this.numPortion.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
             this.numPortion.Location = new System.Drawing.Point(58, 373);
             this.numPortion.Maximum = new decimal(new int[] {
             255,
@@ -159,7 +165,7 @@
             0,
             0});
             this.numPortion.Name = "numPortion";
-            this.numPortion.Size = new System.Drawing.Size(40, 20);
+            this.numPortion.Size = new System.Drawing.Size(44, 20);
             this.numPortion.TabIndex = 11;
             this.numPortion.Value = new decimal(new int[] {
             1,

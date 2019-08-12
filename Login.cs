@@ -124,8 +124,8 @@ namespace reapEAT
                 lblUserInfo.Visible = false;
                 lblPassInfo.Visible = false;
 
-                try
-                {
+                //try
+                //{
                 using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
                 {
                     string query;
@@ -209,21 +209,31 @@ namespace reapEAT
                         sqlAddUserCMD.ExecuteNonQuery();
 
                         /// Get IdUser
-                        SqlCommand sqlFindIdCMD = new SqlCommand("select dbo.FindIdLogin(@Login, @Password", sqlConnection)
+                        /// 
+                        SqlCommand sqlCommand = new SqlCommand("select dbo.FindIdLogin(@Login, @Password)", sqlConnection)
                         {
                             CommandType = CommandType.Text
                         };
-                        sqlFindIdCMD.Parameters.Add(new SqlParameter("@Login", username));
-                        sqlFindIdCMD.Parameters.Add(new SqlParameter("@Password", password));
-                        int id = (int)sqlFindIdCMD.ExecuteScalar();
+                        sqlCommand.Parameters.Add(new SqlParameter("@Login", username));
+                        sqlCommand.Parameters.Add(new SqlParameter("@Password", password));
+                        int id = (int)sqlCommand.ExecuteScalar();
 
-                        /// Add users fridge data table
+                        /// Add user fridge data table
                         SqlCommand sqlCreateFridgeCMD = new SqlCommand("CreateUserFridge", sqlConnection)
                         {
                             CommandType = CommandType.StoredProcedure
                         };
                         sqlCreateFridgeCMD.Parameters.AddWithValue("@TableName", id);
                         sqlCreateFridgeCMD.ExecuteNonQuery();
+
+
+                        /// Add user diet list data table
+                        SqlCommand sqlCreateDietListCMD = new SqlCommand("CreateUserDietList", sqlConnection)
+                        {
+                            CommandType = CommandType.StoredProcedure
+                        };
+                        sqlCreateDietListCMD.Parameters.AddWithValue("@TableName", id);
+                        sqlCreateDietListCMD.ExecuteNonQuery();
 
                         sqlConnection.Close();
 
@@ -243,12 +253,12 @@ namespace reapEAT
 ;
                     }
                 }
-                }
-                catch (Exception) /// Server connection problem
-                {
-                    MessageBox.Show("Couldn't connect to the server", "Server problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                //}
+                //catch (Exception) /// Server connection problem
+                //{
+                //    MessageBox.Show("Couldn't connect to the server", "Server problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    return;
+                //}
             }
         }
     }

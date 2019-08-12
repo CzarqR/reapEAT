@@ -25,7 +25,6 @@ namespace reapEAT
         // set one to test mode, change after finish !!!!!!!!!!!!!
         public static int IdUser = 1;
 
-        
 
     }
 

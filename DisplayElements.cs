@@ -28,7 +28,7 @@ namespace reapEAT
             controls[0].Location = new Point(startX, startY);
             for (int i = 1; i < controls.Count; i++)
             {
-                controls[i].Location = new Point(controls[i - 1].Location.X + controls[i - 1].Size.Width + spaceX, controls[i - 1].Location.Y);
+                controls[i].Location = new Point(controls[i - 1].Location.X + ((spaceX > 0) ? (controls[i - 1].Size.Width) : (0)) + spaceX, controls[i - 1].Location.Y +( spaceY>0? (controls[i - 1].Size.Height):0) + spaceY);
             }
         }
 

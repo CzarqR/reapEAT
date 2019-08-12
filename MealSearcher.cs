@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
@@ -12,8 +11,11 @@ using System.Windows.Forms;
 
 namespace reapEAT
 {
-    public partial class Main : Form
+    public partial class MealSearcher : Form
     {
+        private readonly int idDiet;
+        private int idRecipe;
+
         private Byte actualSortedColumn = 255;
         private readonly Dictionary<Byte, string> foodTypeDict;
         private readonly Dictionary<Byte, string> foodStyleDict;
@@ -31,14 +33,10 @@ namespace reapEAT
         private readonly Dictionary<int, string> pickedIngridients = new Dictionary<int, string>();
         private readonly List<Label> labels = new List<Label>();
 
-
-
-
-
-
-
-        public Main()
+        public MealSearcher(int idDiet)
         {
+            this.idDiet = idDiet;
+
             InitializeComponent();
             ///Image list load
             foreach (string f in System.IO.Directory.GetFiles(X.ImageFolder()))
@@ -66,11 +64,12 @@ namespace reapEAT
 
             /// Ingridients load
             LoadIngridients();
+            datTimPickDate.Value = DateTime.Today.Date + new TimeSpan(12, 00, 00);
+            datTimPickDate.CustomFormat = "dddd d MMMM - HH:mm";
+
 
 
         }
-
-
 
         /// <summary>
         /// Sorting list by clicing on column name
@@ -206,11 +205,6 @@ namespace reapEAT
             return "";
         }
 
-        private void ButTEST_Click(object sender, EventArgs e)
-        {
-            ///TESTING
-
-        }
 
         /// <summary>
         /// Load all recipoes to ListView which meet the filters
@@ -229,7 +223,7 @@ namespace reapEAT
                     if (FindIngridient.LookForString(row.Field<string>("Ingredients"), pickedIngridients))
                     {
                         ListViewItem item = new ListViewItem(row.Field<string>("Name"));
-                        item.SubItems.Add(row.Field<Int32>("Calories").ToString());
+                        item.SubItems.Add(row.Field<Int16>("Calories").ToString());
                         item.SubItems.Add(row.Field<string>("Ty" +
                             "pe"));
                         item.SubItems.Add(row.Field<string>("Style"));
@@ -350,10 +344,30 @@ namespace reapEAT
 
         private void ListVSearcher_DoubleClick(object sender, EventArgs e)
         {
-            //Hide();
-            Recipe recipe = new Recipe(int.Parse(listVSearcher.SelectedItems[0].SubItems[7].Text));
-            recipe.Show();
-            //Close();
+            idRecipe = int.Parse(listVSearcher.SelectedItems[0].SubItems[7].Text);
+            picBMeal.Image = imageList.Images[idRecipe + ".jpg"];
+            lblName.Text = listVSearcher.SelectedItems[0].SubItems[0].Text;
+        }
+
+        private void ButAdd_Click(object sender, EventArgs e)
+        {
+            AddMeal(idRecipe, datTimPickDate.Value);
+        }
+
+        private void AddMeal(int id, DateTime date)
+        {
+
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                
+                SqlCommand sqlCommandAddMeal = new SqlCommand("INSERT INTO [" + X.IdUser + "_" + idDiet + "_diet] (IdRecipe, Date, Portion) values (" + id + ",'" + date.ToString("yyyy.MM.dd hh:mm:ss") + "', " + numUpPortion.Value.ToString().Replace(',', '.') + ")", sqlConnection)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlConnection.Open();
+                sqlCommandAddMeal.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
         }
     }
 }

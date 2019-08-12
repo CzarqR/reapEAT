@@ -47,6 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNewRecipe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewRecipe.Designer.cs">
+      <DependentUpon>AddNewRecipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Diet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diet.Designer.cs">
+      <DependentUpon>Diet.cs</DependentUpon>
+    </Compile>
     <Compile Include="DisplayElements.cs" />
     <Compile Include="FindIngridient.cs" />
     <Compile Include="Fridge.cs">
@@ -55,6 +67,7 @@
     <Compile Include="Fridge.Designer.cs">
       <DependentUpon>Fridge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ingredient.cs" />
     <Compile Include="ListViewCompare.cs" />
     <Compile Include="LoadDB.cs" />
     <Compile Include="Login.cs">
@@ -69,8 +82,19 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="MealSearcher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MealSearcher.Designer.cs">
+      <DependentUpon>MealSearcher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Recipe.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +108,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddNewRecipe.resx">
+      <DependentUpon>AddNewRecipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Diet.resx">
+      <DependentUpon>Diet.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Fridge.resx">
       <DependentUpon>Fridge.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +122,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MealSearcher.resx">
+      <DependentUpon>MealSearcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Recipe.resx">
       <DependentUpon>Recipe.cs</DependentUpon>

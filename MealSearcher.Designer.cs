@@ -1,6 +1,6 @@
 ﻿namespace reapEAT
 {
-    partial class Main
+    partial class MealSearcher
     {
         /// <summary>
         /// Required designer variable.
@@ -55,7 +55,13 @@
             this.ColumnIngr = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.butSearchIngr = new System.Windows.Forms.Button();
             this.txtSearchIngr = new System.Windows.Forms.TextBox();
-            this.butAddNewRec = new System.Windows.Forms.Button();
+            this.datTimPickDate = new System.Windows.Forms.DateTimePicker();
+            this.butAdd = new System.Windows.Forms.Button();
+            this.lblName = new System.Windows.Forms.Label();
+            this.numUpPortion = new System.Windows.Forms.NumericUpDown();
+            this.picBMeal = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpPortion)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBMeal)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList
@@ -276,21 +282,79 @@
             this.txtSearchIngr.Size = new System.Drawing.Size(117, 20);
             this.txtSearchIngr.TabIndex = 23;
             // 
-            // butAddNewRec
+            // datTimPickDate
             // 
-            this.butAddNewRec.Location = new System.Drawing.Point(15, 548);
-            this.butAddNewRec.Name = "butAddNewRec";
-            this.butAddNewRec.Size = new System.Drawing.Size(111, 40);
-            this.butAddNewRec.TabIndex = 24;
-            this.butAddNewRec.Text = "Add new recipe";
-            this.butAddNewRec.UseVisualStyleBackColor = true;
+            this.datTimPickDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.datTimPickDate.Location = new System.Drawing.Point(242, 561);
+            this.datTimPickDate.Name = "datTimPickDate";
+            this.datTimPickDate.Size = new System.Drawing.Size(217, 20);
+            this.datTimPickDate.TabIndex = 25;
             // 
-            // Main
+            // butAdd
+            // 
+            this.butAdd.Location = new System.Drawing.Point(465, 561);
+            this.butAdd.Name = "butAdd";
+            this.butAdd.Size = new System.Drawing.Size(87, 20);
+            this.butAdd.TabIndex = 26;
+            this.butAdd.Text = "Add";
+            this.butAdd.UseVisualStyleBackColor = true;
+            this.butAdd.Click += new System.EventHandler(this.ButAdd_Click);
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(12, 439);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.TabIndex = 27;
+            this.lblName.Text = "Name";
+            // 
+            // numUpPortion
+            // 
+            this.numUpPortion.DecimalPlaces = 2;
+            this.numUpPortion.Increment = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.numUpPortion.Location = new System.Drawing.Point(242, 535);
+            this.numUpPortion.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numUpPortion.Minimum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            131072});
+            this.numUpPortion.Name = "numUpPortion";
+            this.numUpPortion.Size = new System.Drawing.Size(69, 20);
+            this.numUpPortion.TabIndex = 28;
+            this.numUpPortion.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // picBMeal
+            // 
+            this.picBMeal.Location = new System.Drawing.Point(12, 455);
+            this.picBMeal.Name = "picBMeal";
+            this.picBMeal.Size = new System.Drawing.Size(224, 126);
+            this.picBMeal.TabIndex = 29;
+            this.picBMeal.TabStop = false;
+            // 
+            // MealSearcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(979, 600);
-            this.Controls.Add(this.butAddNewRec);
+            this.Controls.Add(this.picBMeal);
+            this.Controls.Add(this.numUpPortion);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.butAdd);
+            this.Controls.Add(this.datTimPickDate);
             this.Controls.Add(this.txtSearchIngr);
             this.Controls.Add(this.butSearchIngr);
             this.Controls.Add(this.listVIngr);
@@ -308,8 +372,10 @@
             this.Controls.Add(this.chLBStyle);
             this.Controls.Add(this.chLBFoodType);
             this.Controls.Add(this.listVSearcher);
-            this.Name = "Main";
+            this.Name = "MealSearcher";
             this.Text = "Main";
+            ((System.ComponentModel.ISupportInitialize)(this.numUpPortion)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBMeal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,6 +408,10 @@
         private System.Windows.Forms.ColumnHeader ColumnIngr;
         private System.Windows.Forms.Button butSearchIngr;
         private System.Windows.Forms.TextBox txtSearchIngr;
-        private System.Windows.Forms.Button butAddNewRec;
+        private System.Windows.Forms.DateTimePicker datTimPickDate;
+        private System.Windows.Forms.Button butAdd;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.NumericUpDown numUpPortion;
+        private System.Windows.Forms.PictureBox picBMeal;
     }
 }
