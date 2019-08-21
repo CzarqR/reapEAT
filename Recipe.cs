@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,28 +20,21 @@ namespace reapEAT
         private bool firstLoad = false; //turn off value change event when form is loaded for the first time
         readonly DataTable dataTableRecice = new DataTable();
         readonly DataTable dataTableFidge = new DataTable();
+        private bool NoFood; //if there is no food in fridge to make meal it ll be true
 
         public Recipe(int idRecipe, double portion = 0)
         {
             this.portion = portion;
             InitializeComponent();
-            try
-            {
-                picDish.Image = Image.FromFile(X.ImageFolder() + idRecipe + ".jpg");
-            }
-            catch (Exception)
-            {
-                // No image
-            }
             LoadDBToTB(idRecipe);
-
             LoadRecipe(idRecipe);
-            lblRecipe.MaximumSize = new Size(250, 0);
-
+            lblRecipe.MaximumSize = new Size(310, 0);
             LoadIngredients();
-
-            DisplayElements.DisplayAll(labelsIngRec, this, 300, 400, 0, 25);
-            DisplayElements.DisplayAll(labelsIngFrid, this, 475, 400, 0, 25);
+            DisplayElements.DisplayAll(labelsIngRec, panel1, 13, 35, 0, 25);
+            DisplayElements.DisplayAll(labelsIngFrid, panel1, 175, 35, 0, 25);
+            this.panel1.Size = new System.Drawing.Size(226, (25 * labelsIngRec.Count + 40));
+            this.ClientSize = new System.Drawing.Size(566, Math.Max(lblRecipe.Bottom, panel1.Bottom) + 4);
+            this.MaximumSize = new System.Drawing.Size(582, Math.Max(lblRecipe.Bottom, panel1.Bottom) + 43);
 
 
         }
@@ -49,19 +43,21 @@ namespace reapEAT
         {
             using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
             {
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select Recipes.Name, Recipes.Recipe, Recipes.Calories, FoodTypes.Type, FoodStyle.Style, Recipes.Time, Recipes.Favourites, FoodDiet.Diet, Recipes.Ingredients, Recipes.IdRecipes, Users.Nickname , Recipes.Portion from Recipes, FoodTypes, FoodStyle, FoodDiet, Users where Recipes.Type = FoodTypes.IdFoodTypes AND Recipes.Diet = FoodDiet.IdDiet AND Recipes.Style = FoodStyle.IdStyle AND Recipes.Author = Users.IdUsers  AND IdRecipes = " + id, sqlConnection);
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("select Recipes.Name, Recipes.Recipe, Recipes.Calories, FoodTypes.Type, FoodStyle.Style, Recipes.Time, Recipes.Favourites, FoodDiet.Diet, Recipes.Ingredients, Recipes.IdRecipes, Users.Nickname , Recipes.Portion, Recipes.Image from Recipes, FoodTypes, FoodStyle, FoodDiet, Users where Recipes.Type = FoodTypes.IdFoodTypes AND Recipes.Diet = FoodDiet.IdDiet AND Recipes.Style = FoodStyle.IdStyle AND Recipes.Author = Users.IdUsers  AND IdRecipes = " + id, sqlConnection);
                 DataTable dataTable = new DataTable();
                 sqlDataAdapter.Fill(dataTable);
                 lblName.Text = dataTable.Rows[0].Field<string>("Name");
                 lblRecipe.Text = dataTable.Rows[0].Field<string>("Recipe");
                 lblRecipe.Text = dataTable.Rows[0].Field<string>("Recipe");
-                lblCalories.Text = dataTable.Rows[0].Field<Int16>("Calories").ToString();
+                lblCalories.Text = dataTable.Rows[0].Field<int>("Calories").ToString();
                 lblAuthor.Text = dataTable.Rows[0].Field<string>("Nickname");
                 lblType.Text = dataTable.Rows[0].Field<string>("Type");
                 lblStyle.Text = dataTable.Rows[0].Field<string>("Style");
                 lblDiet.Text = dataTable.Rows[0].Field<string>("Diet");
 
                 lblTime.Text = (dataTable.Rows[0].Field<Int16>("Time") / 60 != 0 ? dataTable.Rows[0].Field<Int16>("Time") / 60 + " h " : "") + (dataTable.Rows[0].Field<Int16>("Time") % 60 != 0 ? dataTable.Rows[0].Field<Int16>("Time") % 60 + " m" : "");
+
+                picDish.Image = Image.FromStream(new MemoryStream(dataTable.Rows[0].Field<byte[]>("Image")));
 
                 //lblPortion.Text = dataTable.Rows[0].Field<byte>("Portion").ToString();
                 numPortion.Value = dataTable.Rows[0].Field<byte>("Portion");
@@ -76,15 +72,16 @@ namespace reapEAT
 
         private void LoadIngredients()
         {
+            NoFood = false;
             foreach (Label label in labelsIngRec)
             {
-                Controls.Remove(label);
+                panel1.Controls.Remove(label);
             }
             labelsIngRec.Clear();
 
             foreach (Label label in labelsIngFrid)
             {
-                Controls.Remove(label);
+                panel1.Controls.Remove(label);
             }
             labelsIngFrid.Clear();
 
@@ -104,6 +101,8 @@ namespace reapEAT
                 labelsIngRec.Add(label);
 
                 double difference = Math.Round(FindQuantityInFridgeBy(row.Field<int>("IdFood"), (row.Field<double>("Quantity") * scalar)), 2);
+                if (difference < 0)
+                    NoFood = true;
 
                 Label label1 = new Label
                 {
@@ -115,6 +114,7 @@ namespace reapEAT
                 };
                 labelsIngFrid.Add(label1);
             }
+            butShopList.Enabled = NoFood;
         }
 
         private void NumPortion_ValueChanged(object sender, EventArgs e)
@@ -122,8 +122,8 @@ namespace reapEAT
             if (firstLoad)
             {
                 LoadIngredients();
-                DisplayElements.DisplayAll(labelsIngRec, this, 300, 400, 0, 25);
-                DisplayElements.DisplayAll(labelsIngFrid, this, 475, 400, 0, 25);
+                DisplayElements.DisplayAll(labelsIngRec, panel1, 13, 35, 0, 25);
+                DisplayElements.DisplayAll(labelsIngFrid, panel1, 175, 35, 0, 25);
             }
             firstLoad = true;
         }
@@ -166,6 +166,7 @@ namespace reapEAT
                 sqlDataAdapter.Fill(dataTableFidge);
             }
         }
+
 
     }
 }

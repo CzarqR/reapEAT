@@ -9,18 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace reapEAT
 {
     public partial class Main : Form
     {
         private Byte actualSortedColumn = 255;
+        private const int recipesOnOnePage = 25;
         private readonly Dictionary<Byte, string> foodTypeDict;
         private readonly Dictionary<Byte, string> foodStyleDict;
         private readonly Dictionary<Byte, string> foodDietDict;
         private readonly DataTable dataTableRecipe = new DataTable();
         private readonly DataTable dataTableIngr = new DataTable();
-        private const string sqlMainQuery = "select Recipes.Name, Recipes.Calories, FoodTypes.Type, FoodStyle.Style, Recipes.Time, Recipes.Favourites, FoodDiet.Diet, Recipes.Ingredients, Recipes.IdRecipes from Recipes, FoodTypes, FoodStyle, FoodDiet where Recipes.Type = FoodTypes.IdFoodTypes AND Recipes.Diet = FoodDiet.IdDiet AND Recipes.Style = FoodStyle.IdStyle";
+        private const string sqlMainQuery = "select Recipes.Name, Recipes.Calories, FoodTypes.Type, FoodStyle.Style, Recipes.Time, Recipes.Favourites, FoodDiet.Diet, Recipes.Ingredients, Recipes.IdRecipes, Image from Recipes, FoodTypes, FoodStyle, FoodDiet where Recipes.Type = FoodTypes.IdFoodTypes AND Recipes.Diet = FoodDiet.IdDiet AND Recipes.Style = FoodStyle.IdStyle";
         private const string sqlOrderQuery = " order by Favourites desc";
         private string sqlNameQuery = "";
         private string sqlCaloriesQuery = "";
@@ -28,6 +30,10 @@ namespace reapEAT
         private string sqlStyleQuery = "";
         private string sqlTimeQuery = "";
         private string sqlDietQuery = "";
+        private string sqlVerifiedQuery = "";
+        private string sqlRangeQuery = "";
+        private string sqlIngredientQuery = "";
+
         private readonly Dictionary<int, string> pickedIngridients = new Dictionary<int, string>();
         private readonly List<Label> labels = new List<Label>();
 
@@ -40,24 +46,13 @@ namespace reapEAT
         public Main()
         {
             InitializeComponent();
-            ///Image list load
-            foreach (string f in System.IO.Directory.GetFiles(X.ImageFolder()))
-            {
-                try
-                {
-                    Image img = Image.FromFile(f);
-                    imageList.Images.Add(StringCorrect.GetName(f), img);
-                }
-                catch
-                {
-                    // Out of Memory Exceptions are thrown in Image.FromFile if you pass in a non-image file.
-                }
-            }
+            this.ClientSize = new System.Drawing.Size(818, 568);
+
 
             /// FoodType load
-            foodTypeDict = LoadDB.LoadDBId("FoodTypes", "IdFoodTypes", "Type");
-            foodStyleDict = LoadDB.LoadDBId("FoodStyle", "IdStyle", "Style");
-            foodDietDict = LoadDB.LoadDBId("FoodDiet", "IdDiet", "Diet");
+            foodTypeDict = LoadDB.LoadDBByte("FoodTypes", "IdFoodTypes", "Type");
+            foodStyleDict = LoadDB.LoadDBByte("FoodStyle", "IdStyle", "Style");
+            foodDietDict = LoadDB.LoadDBByte("FoodDiet", "IdDiet", "Diet");
 
             /// CheckBoxLoad
             LoadCheckListBox(chLBFoodType, foodTypeDict);
@@ -66,6 +61,7 @@ namespace reapEAT
 
             /// Ingridients load
             LoadIngridients();
+            Search();
 
 
         }
@@ -218,6 +214,7 @@ namespace reapEAT
         /// <param name="query"></param>
         private void LoadDBToListView(string query)
         {
+            imageList.Images.Clear();
             listVSearcher.Items.Clear();
             dataTableRecipe.Clear();
             using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
@@ -226,27 +223,46 @@ namespace reapEAT
                 sqlDataAdapter.Fill(dataTableRecipe);
                 foreach (DataRow row in dataTableRecipe.Rows)
                 {
-                    if (FindIngridient.LookForString(row.Field<string>("Ingredients"), pickedIngridients))
-                    {
-                        ListViewItem item = new ListViewItem(row.Field<string>("Name"));
-                        item.SubItems.Add(row.Field<Int32>("Calories").ToString());
-                        item.SubItems.Add(row.Field<string>("Ty" +
-                            "pe"));
-                        item.SubItems.Add(row.Field<string>("Style"));
-                        item.SubItems.Add((row.Field<Int16>("Time") / 60 != 0 ? row.Field<Int16>("Time") / 60 + " h " : "") + (row.Field<Int16>("Time") % 60 != 0 ? row.Field<Int16>("Time") % 60 + " m" : ""));
-                        item.SubItems.Add(row.Field<Int32>("Favourites").ToString());
-                        item.SubItems.Add(row.Field<string>("Diet"));
-                        item.SubItems.Add(row.Field<Int32>("IdRecipes").ToString());
-                        item.SubItems.Add(row.Field<Int16>("Time").ToString());
-                        item.ImageKey = row.Field<Int32>("IdRecipes").ToString() + ".jpg";
-                        listVSearcher.Items.Add(item);
-                    }
+
+                    ListViewItem item = new ListViewItem(row.Field<string>("Name"));
+                    item.SubItems.Add(row.Field<Int32>("Calories").ToString());
+                    item.SubItems.Add(row.Field<string>("Ty" +
+                        "pe"));
+                    item.SubItems.Add(row.Field<string>("Style"));
+                    item.SubItems.Add((row.Field<Int16>("Time") / 60 != 0 ? row.Field<Int16>("Time") / 60 + " h " : "") + (row.Field<Int16>("Time") % 60 != 0 ? row.Field<Int16>("Time") % 60 + " m" : ""));
+                    item.SubItems.Add(row.Field<Int32>("Favourites").ToString());
+                    item.SubItems.Add(row.Field<string>("Diet"));
+                    item.SubItems.Add(row.Field<Int32>("IdRecipes").ToString());
+                    item.SubItems.Add(row.Field<Int16>("Time").ToString());
+
+
+                    imageList.Images.Add(row.Field<Int32>("IdRecipes").ToString(), Image.FromStream(new MemoryStream(row.Field<byte[]>("Image"))));
+
+                    item.ImageKey = row.Field<Int32>("IdRecipes").ToString();
+                    listVSearcher.Items.Add(item);
+
                 }
             }
         }
 
+        /// TO DO !!!!!!!!! FUNCTION THAT LL RETURN NUMBER OF ROWS IN DB FOR ACTUAL SEARCHER
 
-        private void ButSearch_Click(object sender, EventArgs e)
+        //private int CountRows()
+        //{
+        //    using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+        //    {
+
+        //        SqlCommand sqlCommandAddMeal = new SqlCommand()
+        //        {
+        //            CommandType = CommandType.Text
+        //        };
+        //        sqlConnection.Open();
+        //        sqlCommandAddMeal.ExecuteNonQuery();
+        //        sqlConnection.Close();
+        //    }
+        //}
+
+        private void Search()
         {
             sqlTypeQuery = LoadFiltersToQuery(chLBFoodType, "FoodTypes.Type");
             sqlDietQuery = LoadFiltersToQuery(chLBDiet, "FoodDiet.Diet");
@@ -254,7 +270,29 @@ namespace reapEAT
             sqlCaloriesQuery = LoadRangeToQuery(txtCalMin, txtCalMax, "Recipes.Calories");
             sqlTimeQuery = LoadRangeToQuery(txtTimeMin, txtTimeMax, "Recipes.Time");
             sqlNameQuery = LoadNameQuery();
-            LoadDBToListView(sqlMainQuery + sqlNameQuery + sqlCaloriesQuery + sqlTypeQuery + sqlStyleQuery + sqlTimeQuery + sqlDietQuery + sqlOrderQuery);
+            LoadVerifiedQuery();
+            LoadRangeQuery();
+            LoadIngredientsToQuery();
+            LoadDBToListView(sqlMainQuery + sqlNameQuery + sqlCaloriesQuery + sqlTypeQuery + sqlStyleQuery + sqlTimeQuery + sqlDietQuery + sqlVerifiedQuery + sqlIngredientQuery + sqlOrderQuery + sqlRangeQuery);
+        }
+
+        private void ButSearch_Click(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void LoadVerifiedQuery()
+        {
+            if (chBVerified.Checked)
+                sqlVerifiedQuery = " AND Recipes.Verified = 1";
+            else
+                sqlVerifiedQuery = "";
+
+        }
+
+        private void LoadRangeQuery()
+        {
+            sqlRangeQuery = " offset " + (((int)numUDPage.Value - 1) * recipesOnOnePage) + " rows fetch next " + recipesOnOnePage + " rows only";
         }
 
         /// <summary>
@@ -296,13 +334,13 @@ namespace reapEAT
                     Size = new Size(70, 20),
                     TabIndex = 17,
                     Visible = true,
-                    BackColor = Color.Orange,
+                    BackColor = Color.LemonChiffon,
                     Cursor = Cursors.No,
                     Tag = "Ing",
                 };
                 label.Click += new EventHandler(this.LblIngrClick);
                 labels.Add(label);
-                DisplayElements.ChangeLocation(labels, 30, 450, 25, 10);
+                DisplayElements.ChangeLocation(labels, 12, 560, 15, 0, 800, 20);
                 Controls.Add(label);
             }
         }
@@ -329,7 +367,7 @@ namespace reapEAT
             Controls.Remove(label);
             labels.Remove(label);
             pickedIngridients.Remove(FindKey(pickedIngridients, label.Text));
-            DisplayElements.ChangeLocation(labels, 30, 450, 25, 10);
+            DisplayElements.ChangeLocation(labels, 12, 560, 15, 0, 800, 20);
         }
 
         /// <summary>
@@ -354,6 +392,107 @@ namespace reapEAT
             Recipe recipe = new Recipe(int.Parse(listVSearcher.SelectedItems[0].SubItems[7].Text));
             recipe.Show();
             //Close();
+        }
+
+        private void ButAddNewRec_Click(object sender, EventArgs e)
+        {
+            AddNewRecipe addNewRecipe = new AddNewRecipe();
+            addNewRecipe.Show();
+        }
+
+        private void ChLBFoodType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoadIngredientsToQuery()
+        {
+            sqlIngredientQuery = "";
+            foreach (KeyValuePair<int, string> key in pickedIngridients)
+            {
+                sqlIngredientQuery += " AND [Recipes].Ingredients LIKE '%" + key.Key + "%'";
+            }
+        }
+
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            if (butShowFilters.Text == "Show filters")
+            {
+                butShowFilters.Text = "Hide Filters";
+                this.ClientSize = new System.Drawing.Size(1070, 600);
+
+            }
+            else
+            {
+
+                this.ClientSize = new System.Drawing.Size(818, 568);
+                butShowFilters.Text = "Show filters";
+
+            }
+        }
+
+        private void UnChackList(CheckedListBox x)
+        {
+            for (int i = 0; i < x.Items.Count; i++)
+            {
+                x.SetItemChecked(i, false);
+            }
+        }
+       
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            chLBDiet.SetItemChecked(0, false);
+            txtCalMax.Text = "";
+            txtCalMin.Text = "";
+            txtSearch.Text = "";
+            txtTimeMax.Text = "";
+            txtTimeMin.Text = "";
+            UnChackList(chLBFoodType);
+            UnChackList(chLBDiet);
+            UnChackList(chLBStyle);
+
+
+            foreach (Label label in labels)
+            {
+                Controls.Remove(label);
+            }
+            pickedIngridients.Clear();
+            labels.Clear();
+            DisplayElements.ChangeLocation(labels, 12, 560, 15, 0, 800, 20);
+        }
+
+        private void NumUDPage_ValueChanged(object sender, EventArgs e)
+        {
+            Search();
+        }
+
+        private void LblPrev_Click(object sender, EventArgs e)
+        {
+            if (numUDPage.Value != numUDPage.Minimum)
+                numUDPage.Value -= 1;
+        }
+
+        private void LblNext_Click(object sender, EventArgs e)
+        {
+            numUDPage.Value += 1;
+        }
+
+        private void ButReturn_Click(object sender, EventArgs e)
+        {
+            Hide();
+            Menu menu  = new Menu();
+            menu.ShowDialog();
+            Close();
+        }
+
+        private void TxtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter) /// Enter barcode
+            {
+                Search();
+            }
         }
     }
 }

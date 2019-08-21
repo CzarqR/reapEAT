@@ -104,10 +104,7 @@ namespace reapEAT
             Console.WriteLine(listVFridge.SelectedItems[0].SubItems[4].Text);
         }
 
-        private void ButAdd_Click(object sender, EventArgs e)
-        {
-
-        }
+   
 
         private void TxtBarcode_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -196,22 +193,51 @@ namespace reapEAT
                     sqlConnection.Open();
                     sqlAddFoodToFridge.ExecuteNonQuery();
                     sqlConnection.Close();
+                    lblQuantity.Visible = false;
+                    txtQuantity.Visible = false;
+                    txtComment.Visible = false;
+                    lblComment.Visible = false;
+                    lblExpirationDate.Visible = false;
+                    datePickerExpirationDate.Visible = false;
+                    lblMeasure.Visible = false;
+                    lblFoundFood.Visible = false;
+                    comBFoundFood.Visible = false;
+                    butChechAdd.Visible = false;
+                    butJustAdd.Visible = false;
+                    listVSameFood.Visible = false;
                 }
                 LoadDBToListView(queryFridge);
+
+
             }
             else /// there is the same food in fridge
             {
-                Console.WriteLine("YES");
+                listVSameFood.Visible = true;
                 LoadSameFoodDB();
-
             }
+            
+            
         }
 
         private void SearchFood()
         {
+            lblQuantity.Visible = false;
+            txtQuantity.Visible = false;
+            txtComment.Visible = false;
+            lblComment.Visible = false;
+            lblExpirationDate.Visible = false;
+            datePickerExpirationDate.Visible = false;
+            lblMeasure.Visible = false;
+            lblFoundFood.Visible = false;
+            comBFoundFood.Visible = false;
+            butChechAdd.Visible = false;
+            butJustAdd.Visible = false;
+            listVSameFood.Visible = false;
             comBFoundFood.Items.Clear();
             dataTableFoundFood.Clear();
-            //IdAndName.Clear();
+            
+
+
             if (txtFoodToFind.Text.Length > 0)
             {
                 string query;
@@ -237,9 +263,29 @@ namespace reapEAT
                     comBFoundFood.Items.Add(row.Field<string>("Name"));
                 }
 
-                if (comBFoundFood.Items.Count > 0) // at least one food was found
+                if (comBFoundFood.Items.Count == 0)
+                {
+                    lblFoundFood.Visible = true;
+                    comBFoundFood.Visible = true;
+                    comBFoundFood.Items.Add("Food not found");
+                    comBFoundFood.SelectedIndex = 0;
+                    return;
+                }
+
+                else if (comBFoundFood.Items.Count > 0) // at least one food was found
                 {
                     ChangeFoodComboBox(0);
+                    lblQuantity.Visible = true;
+                    txtQuantity.Visible = true;
+                    txtComment.Visible = true;
+                    lblComment.Visible = true;
+                    lblExpirationDate.Visible = true;
+                    datePickerExpirationDate.Visible = true;
+                    lblMeasure.Visible = true;
+                    lblFoundFood.Visible = true;
+                    comBFoundFood.Visible = true;
+                    butChechAdd.Visible = true;
+                    butJustAdd.Visible = true;
                 }
             }
         }
@@ -257,6 +303,10 @@ namespace reapEAT
 
         private void ComBFoundFood_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comBFoundFood.Items[0].ToString() == "Food not found")
+            {
+                return;
+            }
             ChangeFoodComboBox(comBFoundFood.SelectedIndex);
         }
 
@@ -292,10 +342,10 @@ namespace reapEAT
 
         private void ListVSameFood_DoubleClick(object sender, EventArgs e)
         {
-            if (listVSameFood.SelectedItems[0].SubItems[6].Text != "-")
+            if (listVSameFood.SelectedItems[0].SubItems[1].Text != "-")
             {
                 Console.WriteLine("in");
-                quantity = ((double.Parse(listVSameFood.SelectedItems[0].SubItems[6].Text) + double.Parse(quantity)).ToString()).Replace(',', '.');
+                quantity = ((double.Parse(listVSameFood.SelectedItems[0].SubItems[1].Text) + double.Parse(quantity)).ToString()).Replace(',', '.');
             }
             else
             {
@@ -318,6 +368,19 @@ namespace reapEAT
                 sqlConnection.Close();
             }
             LoadDBToListView(queryFridge);
+            lblQuantity.Visible = false;
+            txtQuantity.Visible = false;
+            txtComment.Visible = false;
+            lblComment.Visible = false;
+            lblExpirationDate.Visible = false;
+            datePickerExpirationDate.Visible = false;
+            lblMeasure.Visible = false;
+            lblFoundFood.Visible = false;
+            comBFoundFood.Visible = false;
+            butChechAdd.Visible = false;
+            butJustAdd.Visible = false;
+            listVSameFood.Visible = false;
+
 
         }
 
@@ -362,6 +425,8 @@ namespace reapEAT
         private void ButDeleteFood_Click(object sender, EventArgs e)
         {
             DeleteFood();
+            butDeleteFood.Enabled = false;
+            butEditFood.Enabled = false;
         }
 
         private void ButJustAdd_Click(object sender, EventArgs e)
@@ -428,26 +493,99 @@ namespace reapEAT
                 sqlConnection.Close();
             }
             LoadDBToListView(queryFridge);
-
+            lblQuantity.Visible = false;
+            txtQuantity.Visible = false;
+            txtComment.Visible = false;
+            lblComment.Visible = false;
+            lblExpirationDate.Visible = false;
+            datePickerExpirationDate.Visible = false;
+            lblMeasure.Visible = false;
+            lblFoundFood.Visible = false;
+            comBFoundFood.Visible = false;
+            butChechAdd.Visible = false;
+            butJustAdd.Visible = false;
+            listVSameFood.Visible = false;
+            txtComment.Text = "";
+            txtQuantity.Text = "";
         }
 
         private void ButEditFood_Click(object sender, EventArgs e)
         {
-            txtQuantity.Text = listVFridge.SelectedItems[0].SubItems[6].Text.ToString();
-            txtComment.Text = listVFridge.SelectedItems[0].SubItems[2].Text.ToString();
+            txtComment.Text = "";
+            txtFoodToFind.Text = "";
+            txtQuantity.Text = "";
+            lblFoundFood.Visible = false;
+            comBFoundFood.Visible = false;
+            listVSameFood.Visible = false;
+            lblQuantity.Visible = true;
+            txtQuantity.Visible = true;
+            txtComment.Visible = true;
+            lblComment.Visible = true;
+            lblExpirationDate.Visible = true;
+            datePickerExpirationDate.Visible = true;
+            butConfirm.Visible = true;
+            lblMeasure.Visible = true;
+            butChechAdd.Visible = false;
+            butJustAdd.Visible = false;
             lblMeasure.Text = listVFridge.SelectedItems[0].SubItems[5].Text.ToString();
-            try
+
+           
+
+            
+            //txtQuantity.Text = listVFridge.SelectedItems[0].SubItems[6].Text.ToString();
+            //txtComment.Text = listVFridge.SelectedItems[0].SubItems[2].Text.ToString();
+            //try
+            //{
+            //    datePickerExpirationDate.Value = DateTime.Parse(listVFridge.SelectedItems[0].SubItems[3].Text.ToString());
+            //}
+            //catch (Exception)
+            //{
+            //    datePickerExpirationDate.Value = DateTime.Today;
+            //    datePickerExpirationDate.Checked = false;
+            //}
+        }
+
+        
+
+        private void ListVFridge_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            if (e.Column == actualSortedColumn)
             {
-                datePickerExpirationDate.Value = DateTime.Parse(listVFridge.SelectedItems[0].SubItems[3].Text.ToString());
+                if (e.Column == 0 || e.Column == 2)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewStringComparerDsc(e.Column);
+                }
+                else if (e.Column == 1)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDoubleComparerDsc(6);
+                }
+                else
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDateComparerDsc(7);
+                }
+                actualSortedColumn = 255;
             }
-            catch (Exception)
+            else
             {
-                datePickerExpirationDate.Value = DateTime.Today;
-                datePickerExpirationDate.Checked = false;
+                if (e.Column == 0 || e.Column == 2)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewStringComparerAsc(e.Column);
+                }
+                else if (e.Column == 1)
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDoubleComparerAsc(6);
+
+                }
+                else
+                {
+                    listVFridge.ListViewItemSorter = new ListViewDateComparerAsc(7);
+
+                }
+                actualSortedColumn = (Byte)e.Column;
             }
         }
 
-        private void ButUpdate_Click(object sender, EventArgs e)
+        private void ButConfirm_Click_1(object sender, EventArgs e)
         {
             /// Quantity
             if (txtQuantity.Text.Length > 0)
@@ -489,10 +627,10 @@ namespace reapEAT
             {
                 comment = "NULL";
             }
-
             using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
             {
                 string Q = "UPDATE [" + X.IdUser + "_fridge] SET QuantityInFridge = " + quantity + ", ExpirationDate = " + date + ", ProductInfo = " + comment + " WHERE IdItemInFridge = " + listVFridge.SelectedItems[0].SubItems[4].Text.ToString();
+                Console.WriteLine(Q);
                 SqlCommand sqlUpdateFoodInFridge = new SqlCommand(Q, sqlConnection)
                 {
                     CommandType = CommandType.Text
@@ -502,44 +640,27 @@ namespace reapEAT
                 sqlConnection.Close();
             }
             LoadDBToListView(queryFridge);
+            lblQuantity.Visible = false;
+            txtQuantity.Visible = false;
+            txtComment.Visible = false;
+            lblComment.Visible = false;
+            lblExpirationDate.Visible = false;
+            datePickerExpirationDate.Visible = false;
+            butConfirm.Visible = false;
+            lblMeasure.Visible = false;
+            txtComment.Text = "";
+            txtFoodToFind.Text = "";
+            txtQuantity.Text = "";
+            butEditFood.Enabled = false;
+            butDeleteFood.Enabled = false;
         }
 
-        private void ListVFridge_ColumnClick(object sender, ColumnClickEventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            if (e.Column == actualSortedColumn)
-            {
-                if (e.Column == 0 || e.Column == 2)
-                {
-                    listVFridge.ListViewItemSorter = new ListViewStringComparerDsc(e.Column);
-                }
-                else if (e.Column == 1)
-                {
-                    listVFridge.ListViewItemSorter = new ListViewDoubleComparerDsc(6);
-                }
-                else
-                {
-                    listVFridge.ListViewItemSorter = new ListViewDateComparerDsc(7);
-                }
-                actualSortedColumn = 255;
-            }
-            else
-            {
-                if (e.Column == 0 || e.Column == 2)
-                {
-                    listVFridge.ListViewItemSorter = new ListViewStringComparerAsc(e.Column);
-                }
-                else if (e.Column == 1)
-                {
-                    listVFridge.ListViewItemSorter = new ListViewDoubleComparerAsc(6);
-
-                }
-                else
-                {
-                    listVFridge.ListViewItemSorter = new ListViewDateComparerAsc(7);
-
-                }
-                actualSortedColumn = (Byte)e.Column;
-            }
+            Hide();
+            Menu menu = new Menu();
+            menu.ShowDialog();
+            Close();
         }
     }
 }

@@ -1,0 +1,1 @@
+﻿UPDATE Recipes SET [Image] = (SELECT MyImage.* from Openrowset(Bulk 'C:\Programowanie Projekty\C#\reapEAT\Images\4.jpg', Single_Blob) MyImage)

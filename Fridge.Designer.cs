@@ -33,9 +33,7 @@
             this.columnQuantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnComment = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnExpirationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.butAdd = new System.Windows.Forms.Button();
             this.butDeleteFood = new System.Windows.Forms.Button();
-            this.butBarcode = new System.Windows.Forms.Button();
             this.butFind = new System.Windows.Forms.Button();
             this.txtFoodToFind = new System.Windows.Forms.TextBox();
             this.datePickerExpirationDate = new System.Windows.Forms.DateTimePicker();
@@ -55,22 +53,24 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.butEditFood = new System.Windows.Forms.Button();
             this.butJustAdd = new System.Windows.Forms.Button();
-            this.butUpdate = new System.Windows.Forms.Button();
-            this.lblNoFoodInDB = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.butConfirm = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listVFridge
             // 
+            this.listVFridge.BackColor = System.Drawing.Color.SandyBrown;
             this.listVFridge.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnName,
             this.columnQuantity,
             this.columnComment,
             this.columnExpirationDate});
+            this.listVFridge.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.listVFridge.FullRowSelect = true;
             this.listVFridge.HideSelection = false;
             this.listVFridge.Location = new System.Drawing.Point(12, 12);
             this.listVFridge.Name = "listVFridge";
-            this.listVFridge.Size = new System.Drawing.Size(367, 169);
+            this.listVFridge.Size = new System.Drawing.Size(380, 449);
             this.listVFridge.TabIndex = 0;
             this.listVFridge.UseCompatibleStateImageBehavior = false;
             this.listVFridge.View = System.Windows.Forms.View.Details;
@@ -99,51 +99,39 @@
             this.columnExpirationDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnExpirationDate.Width = 84;
             // 
-            // butAdd
-            // 
-            this.butAdd.Location = new System.Drawing.Point(12, 210);
-            this.butAdd.Name = "butAdd";
-            this.butAdd.Size = new System.Drawing.Size(76, 38);
-            this.butAdd.TabIndex = 2;
-            this.butAdd.Text = "Add food";
-            this.butAdd.UseVisualStyleBackColor = true;
-            this.butAdd.Click += new System.EventHandler(this.ButAdd_Click);
-            // 
             // butDeleteFood
             // 
+            this.butDeleteFood.BackColor = System.Drawing.Color.SandyBrown;
             this.butDeleteFood.Enabled = false;
-            this.butDeleteFood.Location = new System.Drawing.Point(391, 12);
+            this.butDeleteFood.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butDeleteFood.Location = new System.Drawing.Point(508, 12);
             this.butDeleteFood.Name = "butDeleteFood";
-            this.butDeleteFood.Size = new System.Drawing.Size(76, 38);
+            this.butDeleteFood.Size = new System.Drawing.Size(100, 35);
             this.butDeleteFood.TabIndex = 3;
-            this.butDeleteFood.Text = "Delete food";
-            this.butDeleteFood.UseVisualStyleBackColor = true;
+            this.butDeleteFood.Text = "Delete";
+            this.butDeleteFood.UseVisualStyleBackColor = false;
             this.butDeleteFood.Click += new System.EventHandler(this.ButDeleteFood_Click);
-            // 
-            // butBarcode
-            // 
-            this.butBarcode.Location = new System.Drawing.Point(94, 189);
-            this.butBarcode.Name = "butBarcode";
-            this.butBarcode.Size = new System.Drawing.Size(91, 38);
-            this.butBarcode.TabIndex = 4;
-            this.butBarcode.Text = "By Barcode";
-            this.butBarcode.UseVisualStyleBackColor = true;
             // 
             // butFind
             // 
-            this.butFind.Location = new System.Drawing.Point(94, 233);
+            this.butFind.BackColor = System.Drawing.Color.SandyBrown;
+            this.butFind.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butFind.Location = new System.Drawing.Point(402, 53);
             this.butFind.Name = "butFind";
-            this.butFind.Size = new System.Drawing.Size(91, 38);
+            this.butFind.Size = new System.Drawing.Size(100, 35);
             this.butFind.TabIndex = 5;
             this.butFind.Text = "Find food";
-            this.butFind.UseVisualStyleBackColor = true;
+            this.butFind.UseVisualStyleBackColor = false;
             this.butFind.Click += new System.EventHandler(this.ButFind_Click);
             // 
             // txtFoodToFind
             // 
-            this.txtFoodToFind.Location = new System.Drawing.Point(191, 221);
+            this.txtFoodToFind.BackColor = System.Drawing.Color.LemonChiffon;
+            this.txtFoodToFind.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtFoodToFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtFoodToFind.Location = new System.Drawing.Point(508, 60);
             this.txtFoodToFind.Name = "txtFoodToFind";
-            this.txtFoodToFind.Size = new System.Drawing.Size(100, 20);
+            this.txtFoodToFind.Size = new System.Drawing.Size(186, 21);
             this.txtFoodToFind.TabIndex = 6;
             this.txtFoodToFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBarcode_KeyPress);
             // 
@@ -151,95 +139,114 @@
             // 
             this.datePickerExpirationDate.Checked = false;
             this.datePickerExpirationDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePickerExpirationDate.Location = new System.Drawing.Point(412, 289);
+            this.datePickerExpirationDate.Location = new System.Drawing.Point(487, 186);
             this.datePickerExpirationDate.MaxDate = new System.DateTime(2499, 12, 31, 0, 0, 0, 0);
             this.datePickerExpirationDate.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.datePickerExpirationDate.Name = "datePickerExpirationDate";
             this.datePickerExpirationDate.ShowCheckBox = true;
             this.datePickerExpirationDate.Size = new System.Drawing.Size(113, 20);
             this.datePickerExpirationDate.TabIndex = 7;
+            this.datePickerExpirationDate.Visible = false;
             // 
             // txtComment
             // 
-            this.txtComment.Location = new System.Drawing.Point(379, 263);
+            this.txtComment.BackColor = System.Drawing.Color.LemonChiffon;
+            this.txtComment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtComment.Location = new System.Drawing.Point(459, 160);
             this.txtComment.Name = "txtComment";
-            this.txtComment.Size = new System.Drawing.Size(146, 20);
+            this.txtComment.Size = new System.Drawing.Size(235, 20);
             this.txtComment.TabIndex = 8;
+            this.txtComment.Visible = false;
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(379, 237);
+            this.txtQuantity.BackColor = System.Drawing.Color.LemonChiffon;
+            this.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtQuantity.Location = new System.Drawing.Point(454, 130);
             this.txtQuantity.Name = "txtQuantity";
             this.txtQuantity.Size = new System.Drawing.Size(81, 20);
             this.txtQuantity.TabIndex = 9;
+            this.txtQuantity.Visible = false;
             // 
             // lblQuantity
             // 
             this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(324, 240);
+            this.lblQuantity.Location = new System.Drawing.Point(399, 134);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(49, 13);
             this.lblQuantity.TabIndex = 10;
             this.lblQuantity.Text = "Quantity:";
+            this.lblQuantity.Visible = false;
             // 
             // lblComment
             // 
             this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(324, 266);
+            this.lblComment.Location = new System.Drawing.Point(399, 163);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(54, 13);
             this.lblComment.TabIndex = 11;
             this.lblComment.Text = "Comment:";
+            this.lblComment.Visible = false;
             // 
             // lblExpirationDate
             // 
             this.lblExpirationDate.AutoSize = true;
-            this.lblExpirationDate.Location = new System.Drawing.Point(324, 294);
+            this.lblExpirationDate.Location = new System.Drawing.Point(399, 192);
             this.lblExpirationDate.Name = "lblExpirationDate";
             this.lblExpirationDate.Size = new System.Drawing.Size(82, 13);
             this.lblExpirationDate.TabIndex = 12;
             this.lblExpirationDate.Text = "Expiration Date:";
+            this.lblExpirationDate.Visible = false;
             // 
             // lblMeasure
             // 
             this.lblMeasure.AutoSize = true;
-            this.lblMeasure.Location = new System.Drawing.Point(466, 240);
+            this.lblMeasure.Location = new System.Drawing.Point(541, 134);
             this.lblMeasure.Name = "lblMeasure";
             this.lblMeasure.Size = new System.Drawing.Size(48, 13);
             this.lblMeasure.TabIndex = 13;
             this.lblMeasure.Text = "Measure";
+            this.lblMeasure.Visible = false;
             // 
             // lblFoundFood
             // 
             this.lblFoundFood.AutoSize = true;
-            this.lblFoundFood.Location = new System.Drawing.Point(324, 217);
+            this.lblFoundFood.Location = new System.Drawing.Point(398, 105);
             this.lblFoundFood.Name = "lblFoundFood";
             this.lblFoundFood.Size = new System.Drawing.Size(64, 13);
             this.lblFoundFood.TabIndex = 14;
             this.lblFoundFood.Text = "Found Food";
+            this.lblFoundFood.Visible = false;
             // 
             // butChechAdd
             // 
-            this.butChechAdd.Location = new System.Drawing.Point(677, 223);
+            this.butChechAdd.BackColor = System.Drawing.Color.SandyBrown;
+            this.butChechAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butChechAdd.Location = new System.Drawing.Point(499, 223);
             this.butChechAdd.Name = "butChechAdd";
-            this.butChechAdd.Size = new System.Drawing.Size(88, 28);
+            this.butChechAdd.Size = new System.Drawing.Size(90, 35);
             this.butChechAdd.TabIndex = 15;
             this.butChechAdd.Text = "Check && Add";
-            this.butChechAdd.UseVisualStyleBackColor = true;
+            this.butChechAdd.UseVisualStyleBackColor = false;
+            this.butChechAdd.Visible = false;
             this.butChechAdd.Click += new System.EventHandler(this.ButConfirm_Click);
             // 
             // comBFoundFood
             // 
+            this.comBFoundFood.BackColor = System.Drawing.Color.LemonChiffon;
             this.comBFoundFood.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBFoundFood.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.comBFoundFood.FormattingEnabled = true;
-            this.comBFoundFood.Location = new System.Drawing.Point(393, 210);
+            this.comBFoundFood.Location = new System.Drawing.Point(468, 97);
             this.comBFoundFood.Name = "comBFoundFood";
-            this.comBFoundFood.Size = new System.Drawing.Size(132, 21);
+            this.comBFoundFood.Size = new System.Drawing.Size(146, 21);
             this.comBFoundFood.TabIndex = 17;
+            this.comBFoundFood.Visible = false;
             this.comBFoundFood.SelectedIndexChanged += new System.EventHandler(this.ComBFoundFood_SelectedIndexChanged);
             // 
             // listVSameFood
             // 
+            this.listVSameFood.BackColor = System.Drawing.Color.SandyBrown;
             this.listVSameFood.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -247,12 +254,13 @@
             this.columnHeader4});
             this.listVSameFood.FullRowSelect = true;
             this.listVSameFood.HideSelection = false;
-            this.listVSameFood.Location = new System.Drawing.Point(306, 341);
+            this.listVSameFood.Location = new System.Drawing.Point(402, 264);
             this.listVSameFood.Name = "listVSameFood";
-            this.listVSameFood.Size = new System.Drawing.Size(373, 97);
+            this.listVSameFood.Size = new System.Drawing.Size(363, 129);
             this.listVSameFood.TabIndex = 18;
             this.listVSameFood.UseCompatibleStateImageBehavior = false;
             this.listVSameFood.View = System.Windows.Forms.View.Details;
+            this.listVSameFood.Visible = false;
             this.listVSameFood.DoubleClick += new System.EventHandler(this.ListVSameFood_DoubleClick);
             // 
             // columnHeader1
@@ -278,52 +286,63 @@
             // 
             // butEditFood
             // 
+            this.butEditFood.BackColor = System.Drawing.Color.SandyBrown;
             this.butEditFood.Enabled = false;
-            this.butEditFood.Location = new System.Drawing.Point(392, 59);
+            this.butEditFood.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butEditFood.Location = new System.Drawing.Point(402, 12);
             this.butEditFood.Name = "butEditFood";
-            this.butEditFood.Size = new System.Drawing.Size(74, 39);
+            this.butEditFood.Size = new System.Drawing.Size(100, 35);
             this.butEditFood.TabIndex = 19;
-            this.butEditFood.Text = "Edit Food";
-            this.butEditFood.UseVisualStyleBackColor = true;
+            this.butEditFood.Text = "Edit";
+            this.butEditFood.UseVisualStyleBackColor = false;
             this.butEditFood.Click += new System.EventHandler(this.ButEditFood_Click);
             // 
             // butJustAdd
             // 
-            this.butJustAdd.Location = new System.Drawing.Point(677, 181);
+            this.butJustAdd.BackColor = System.Drawing.Color.SandyBrown;
+            this.butJustAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butJustAdd.Location = new System.Drawing.Point(402, 223);
             this.butJustAdd.Name = "butJustAdd";
-            this.butJustAdd.Size = new System.Drawing.Size(88, 29);
+            this.butJustAdd.Size = new System.Drawing.Size(89, 35);
             this.butJustAdd.TabIndex = 20;
             this.butJustAdd.Text = "Just Add";
-            this.butJustAdd.UseVisualStyleBackColor = true;
+            this.butJustAdd.UseVisualStyleBackColor = false;
+            this.butJustAdd.Visible = false;
             this.butJustAdd.Click += new System.EventHandler(this.ButJustAdd_Click);
             // 
-            // butUpdate
+            // button1
             // 
-            this.butUpdate.Location = new System.Drawing.Point(392, 114);
-            this.butUpdate.Name = "butUpdate";
-            this.butUpdate.Size = new System.Drawing.Size(74, 34);
-            this.butUpdate.TabIndex = 21;
-            this.butUpdate.Text = "Update";
-            this.butUpdate.UseVisualStyleBackColor = true;
-            this.butUpdate.Click += new System.EventHandler(this.ButUpdate_Click);
+            this.button1.BackColor = System.Drawing.Color.SandyBrown;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(398, 424);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 35);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Menu";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // lblNoFoodInDB
+            // butConfirm
             // 
-            this.lblNoFoodInDB.AutoSize = true;
-            this.lblNoFoodInDB.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblNoFoodInDB.Location = new System.Drawing.Point(324, 189);
-            this.lblNoFoodInDB.Name = "lblNoFoodInDB";
-            this.lblNoFoodInDB.Size = new System.Drawing.Size(214, 13);
-            this.lblNoFoodInDB.TabIndex = 22;
-            this.lblNoFoodInDB.Text = "There is no food here that you want to add?";
+            this.butConfirm.BackColor = System.Drawing.Color.SandyBrown;
+            this.butConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butConfirm.Location = new System.Drawing.Point(401, 223);
+            this.butConfirm.Name = "butConfirm";
+            this.butConfirm.Size = new System.Drawing.Size(90, 35);
+            this.butConfirm.TabIndex = 22;
+            this.butConfirm.Text = "Confirm";
+            this.butConfirm.UseVisualStyleBackColor = false;
+            this.butConfirm.Visible = false;
+            this.butConfirm.Click += new System.EventHandler(this.ButConfirm_Click_1);
             // 
             // Fridge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lblNoFoodInDB);
-            this.Controls.Add(this.butUpdate);
+            this.BackColor = System.Drawing.Color.LightSeaGreen;
+            this.ClientSize = new System.Drawing.Size(777, 470);
+            this.Controls.Add(this.butConfirm);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.butJustAdd);
             this.Controls.Add(this.butEditFood);
             this.Controls.Add(this.listVSameFood);
@@ -339,10 +358,9 @@
             this.Controls.Add(this.datePickerExpirationDate);
             this.Controls.Add(this.txtFoodToFind);
             this.Controls.Add(this.butFind);
-            this.Controls.Add(this.butBarcode);
             this.Controls.Add(this.butDeleteFood);
-            this.Controls.Add(this.butAdd);
             this.Controls.Add(this.listVFridge);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Fridge";
             this.Text = "Fridge";
             this.ResumeLayout(false);
@@ -357,9 +375,7 @@
         private System.Windows.Forms.ColumnHeader columnQuantity;
         private System.Windows.Forms.ColumnHeader columnExpirationDate;
         private System.Windows.Forms.ColumnHeader columnComment;
-        private System.Windows.Forms.Button butAdd;
         private System.Windows.Forms.Button butDeleteFood;
-        private System.Windows.Forms.Button butBarcode;
         private System.Windows.Forms.Button butFind;
         private System.Windows.Forms.TextBox txtFoodToFind;
         private System.Windows.Forms.DateTimePicker datePickerExpirationDate;
@@ -379,7 +395,7 @@
         private System.Windows.Forms.ListView listVSameFood;
         private System.Windows.Forms.Button butEditFood;
         private System.Windows.Forms.Button butJustAdd;
-        private System.Windows.Forms.Button butUpdate;
-        private System.Windows.Forms.Label lblNoFoodInDB;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button butConfirm;
     }
 }

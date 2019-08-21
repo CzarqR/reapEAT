@@ -17,6 +17,7 @@ namespace reapEAT
         public Login()
         {
             InitializeComponent();
+            SetLogin();
         }
 
         // Switching login <--> registration
@@ -29,30 +30,16 @@ namespace reapEAT
             txtEmail.Text = txtNick.Text = txtPass.Text = txtRepPass.Text = "";
             if (status) /// from login to registration
             {
-                lblEmail.Visible = true;
-                txtEmail.Visible = true;
-                lblRepeatPassword.Visible = true;
-                txtRepPass.Visible = true;
-                butConfirm.Text = "Register";
-                lblTitle.Text = "Registration";
-                lblSwitchLogReg.Text = "Already have account? Log in now!";
-                status = false;
+                SetRegistration();
+
             }
             else /// from registration to login
             {
-                lblEmail.Visible = false;
-                txtEmail.Visible = false;
-                lblRepeatPassword.Visible = false;
-                txtRepPass.Visible = false;
-                butConfirm.Text = "Log in";
-                lblTitle.Text = "Login";
-                lblSwitchLogReg.Text = "Don,t have account? Register now!";
-                status = true;
+                SetLogin();
             }
         }
 
-        //Log in on register Button
-        private void ButConfirm_Click(object sender, EventArgs e)
+        private void LogIn()
         {
             if (status) /// login
             {
@@ -73,8 +60,8 @@ namespace reapEAT
                         {
                             X.IdUser = id;
                             Hide();
-                            Main main = new Main();
-                            main.ShowDialog();
+                            Menu menu = new Menu();
+                            menu.ShowDialog();
                             Close();
                         }
                         else /// Wrong login
@@ -133,7 +120,7 @@ namespace reapEAT
                     DataTable dataTable = new DataTable();
 
                     ///Checking Email
-                    string email = txtEmail.Text.Trim();
+                    string email = txtEmail.Text.Trim().ToLower();
                     if (email.Length < 5 || email.IndexOf("@") == -1 || email.IndexOf(".") == -1) /// Wrong email format
                     {
                         lblEmailInfo.Text = "Wrong email format";
@@ -152,15 +139,15 @@ namespace reapEAT
                     }
 
                     ///Checking Username
-                    string username = txtNick.Text.Trim();
-                    if (username.Length < 5) /// Too short username
+                    string username = txtNick.Text.Trim().ToLower();
+                    if (username.Length < 4) /// Too short username
                     {
-                        lblUserInfo.Text = "Username has to be minimum 4 characters long";
+                        lblUserInfo.Text = "Username has to be minimum 4 letters long";
                         lblUserInfo.Visible = true;
                     }
                     else if (!StringCorrect.CheckCorrect(username, 47, 58, 64, 91, 96, 123))
                     {
-                        lblUserInfo.Text = "Username can contains only characters A-Z, a-z, 0-9";
+                        lblUserInfo.Text = "Username can contains only: A-Z, a-z, 0-9";
                         lblUserInfo.Visible = true;
                     }
                     else
@@ -242,8 +229,8 @@ namespace reapEAT
 
                             X.IdUser = id;
                             Hide();
-                            Main main = new Main();
-                            main.ShowDialog();
+                            Menu menu = new Menu();
+                            menu.ShowDialog();
                             Close();
                         }
                         else /// Don't log in after registration
@@ -259,6 +246,88 @@ namespace reapEAT
                 //    MessageBox.Show("Couldn't connect to the server", "Server problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 //    return;
                 //}
+            }
+        }
+
+        //Log in on register Button
+        private void ButConfirm_Click(object sender, EventArgs e)
+        {
+            LogIn();
+        }
+
+        private void SetRegistration()
+        {
+            status = false;
+            this.txtEmail.Location = new System.Drawing.Point(11, 153);
+            this.txtNick.Location = new System.Drawing.Point(11, 199);
+            this.txtPass.Location = new System.Drawing.Point(11, 245);
+            this.txtRepPass.Location = new System.Drawing.Point(11, 291);
+            this.lblEmail.Location = new System.Drawing.Point(11, 132);
+            this.lblUsername.Location = new System.Drawing.Point(11, 178);
+            this.lblPassword.Location = new System.Drawing.Point(11, 224);
+            this.ClientSize = new System.Drawing.Size(370, 412);
+            this.butConfirm.Location = new System.Drawing.Point(11, 330);
+            this.lblUserInfo.Location = new System.Drawing.Point(77, 178);
+            this.lblPassInfo.Location = new System.Drawing.Point(74, 224);
+            this.lblSwitchLogReg.Location = new System.Drawing.Point(51, 370);
+            this.lblEmailInfo.Location = new System.Drawing.Point(53, 132);
+            this.lblRepeatPassword.Location = new System.Drawing.Point(11, 270);
+            lblEmail.Visible = true;
+            txtEmail.Visible = true;
+            lblRepeatPassword.Visible = true;
+            txtRepPass.Visible = true;
+            butConfirm.Text = "Register";
+            lblSwitchLogReg.Text = "Already have account? Log in now!";
+            lblForgetPassword.Visible = false;
+
+        }
+
+        private void SetLogin()
+        {
+            status = true;
+            this.ClientSize = new System.Drawing.Size(370, 361);
+
+            this.txtNick.Location = new System.Drawing.Point(11, 171);
+            this.txtPass.Location = new System.Drawing.Point(11, 217);
+            this.lblUsername.Location = new System.Drawing.Point(11, 153);
+            this.lblPassword.Location = new System.Drawing.Point(11, 196);
+            this.lblUserInfo.Location = new System.Drawing.Point(82, 152);
+            this.lblLogInfo.Location = new System.Drawing.Point(143, 262);
+            this.lblSwitchLogReg.Location = new System.Drawing.Point(51, 302);
+            lblEmail.Visible = false;
+            txtEmail.Visible = false;
+            lblRepeatPassword.Visible = false;
+            txtRepPass.Visible = false;
+            this.butConfirm.Location = new System.Drawing.Point(11, 255);
+            butConfirm.Text = "Log in";
+            lblSwitchLogReg.Text = "Don,t have account? Register now!";
+            lblForgetPassword.Visible = true;
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+            /// TO DO FORGET PASSWORD
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void TxtNick_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter) /// Enter barcode
+            {
+                LogIn();
+            }
+        }
+
+        private void TxtPass_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (e.KeyChar == (char)Keys.Enter) /// Enter barcode
+            {
+                LogIn();
             }
         }
     }
