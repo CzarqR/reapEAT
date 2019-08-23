@@ -137,7 +137,9 @@
             // 
             this.chLBFoodType.BackColor = System.Drawing.Color.LemonChiffon;
             this.chLBFoodType.CheckOnClick = true;
+            this.chLBFoodType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chLBFoodType.FormattingEnabled = true;
+            this.chLBFoodType.HorizontalScrollbar = true;
             this.chLBFoodType.Location = new System.Drawing.Point(938, 26);
             this.chLBFoodType.Name = "chLBFoodType";
             this.chLBFoodType.Size = new System.Drawing.Size(114, 124);
@@ -149,6 +151,7 @@
             this.chLBStyle.BackColor = System.Drawing.Color.LemonChiffon;
             this.chLBStyle.CheckOnClick = true;
             this.chLBStyle.FormattingEnabled = true;
+            this.chLBStyle.HorizontalScrollbar = true;
             this.chLBStyle.Location = new System.Drawing.Point(938, 169);
             this.chLBStyle.Name = "chLBStyle";
             this.chLBStyle.Size = new System.Drawing.Size(114, 124);
@@ -159,6 +162,7 @@
             this.chLBDiet.BackColor = System.Drawing.Color.LemonChiffon;
             this.chLBDiet.CheckOnClick = true;
             this.chLBDiet.FormattingEnabled = true;
+            this.chLBDiet.HorizontalScrollbar = true;
             this.chLBDiet.Location = new System.Drawing.Point(818, 169);
             this.chLBDiet.Name = "chLBDiet";
             this.chLBDiet.Size = new System.Drawing.Size(114, 124);

@@ -22,7 +22,7 @@ namespace reapEAT
             return ConfigurationManager.AppSettings["ImageFolder"];
         }
 
-        public static int IdUser;
+        public static int IdUser = 3014;
 
 
     }

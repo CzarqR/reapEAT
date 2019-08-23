@@ -257,6 +257,8 @@ namespace reapEAT
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            if (cheBDiets.SelectedItems.Count < 1)
+                return;
             DataTable fridgeDT = new DataTable();
             List<IngredientSimple> fridge = new List<IngredientSimple>();
             notFoundFood.Clear();
@@ -340,21 +342,26 @@ namespace reapEAT
                 }
             }
 
-            notFoundFood.Sort();
-            foreach (IngredientSimple item in notFoundFood)
+            if (notFoundFood.Count == 0)
+                MessageBox.Show("You have everything to make all meals", "Shopping list not needed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            else
             {
-                Console.WriteLine(item.IdFood);
-                Console.WriteLine(item.Name);
-                Console.WriteLine(item.Quantity);
-                Console.WriteLine(item.ExpirationDate);
-                Console.WriteLine("===============+===============");
-            }
-            MakeShoppingList();
-            foreach (ShoppingListItem item in shoppingList)
-            {
-                Console.WriteLine(item.Name);
-                Console.WriteLine(item.Quantity);
-                Console.WriteLine();
+                notFoundFood.Sort();
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+                saveFileDialog.RestoreDirectory = true;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (Stream s = File.Open(saveFileDialog.FileName, FileMode.Truncate))
+                    using (StreamWriter sw = new StreamWriter(s))
+                    {
+                        foreach (IngredientSimple item in notFoundFood)
+                        {
+                            sw.Write(item.Name + " -  " + item.Quantity + "  ->" + item.ExpirationDate.ToShortDateString() + Environment.NewLine);
+                        }
+                    }
+                }
             }
         }
 
@@ -491,7 +498,118 @@ namespace reapEAT
             menu.ShowDialog();
             Close();
         }
+
+        private void Button1_Click_1(object sender, EventArgs e)
+        {
+
+            if (cheBDiets.SelectedItems.Count < 1)
+                return;
+            DataTable fridgeDT = new DataTable();
+            List<IngredientSimple> fridge = new List<IngredientSimple>();
+            notFoundFood.Clear();
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT Food.Name, [" + X.IdUser + "_fridge].IdFood,  [" + X.IdUser + "_fridge].QuantityInFridge,  [" + X.IdUser + "_fridge].ExpirationDate from [" + X.IdUser + "_fridge], Food WHERE Food.IdFood = [" + X.IdUser + "_fridge].IdFood order by case when ExpirationDate is null then 1 else 0 end, ExpirationDate", sqlConnection);
+                sqlDataAdapter.Fill(fridgeDT);
+            }
+
+            foreach (DataRow row in fridgeDT.Rows)
+            {
+                double quantity;
+                DateTime date;
+                try
+                {
+                    quantity = row.Field<double>("QuantityInFridge");
+                }
+                catch (Exception)
+                {
+                    quantity = double.PositiveInfinity;
+                }
+
+                try
+                {
+                    date = row.Field<DateTime>("ExpirationDate");
+                }
+                catch (Exception)
+                {
+                    date = new DateTime(2100, 1, 1);
+                }
+                fridge.Add(new IngredientSimple(row.Field<int>("IdFood"), quantity, date, row.Field<string>("Name")));
+            }
+
+            string query = "";
+            foreach (object Diet in cheBDiets.CheckedItems)
+            {
+                query += (" UNION Select IdRecipe, Portion, Date from [" + X.IdUser + "_" + FindKey(UserDiets, Diet.ToString()) + "_diet] where Date between  '" + dateTPMin.Value.ToString("yyyy.MM.dd") + "' AND '" + dateTPMax.Value.ToString("yyyy.MM.dd") + "'");
+            }
+            query = query.Remove(0, 6);
+            query += " order by Date";
+
+            DataTable DietDT = new DataTable();
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+                sqlDataAdapter.Fill(DietDT);
+
+
+                foreach (DataRow Recipe in DietDT.Rows)
+                {
+
+                    DataTable RecipeDT = new DataTable();
+                    SqlDataAdapter sqlDataAdapter2 = new SqlDataAdapter("Select  Food.Name, [" + Recipe.Field<int>("IdRecipe") + "_recipe].IdFood,  [" + Recipe.Field<int>("IdRecipe") + "_recipe].Quantity from [" + Recipe.Field<int>("IdRecipe") + "_recipe], Food Where Food.IdFood =  [" + Recipe.Field<int>("IdRecipe") + "_recipe].IdFood", sqlConnection);
+                    sqlDataAdapter2.Fill(RecipeDT);
+                    foreach (DataRow ingredientInRecipe in RecipeDT.Rows)
+                    {
+                        double quantity = ingredientInRecipe.Field<double>("Quantity") * Recipe.Field<double>("Portion");
+                        foreach (IngredientSimple ingredient in fridge)
+                        {
+                            if (ingredient.IdFood == ingredientInRecipe.Field<int>("IdFood") && ingredient.ExpirationDate >= Recipe.Field<DateTime>("Date"))
+                            {
+                                if (ingredient.Quantity >= quantity)
+                                {
+                                    ingredient.Quantity -= ingredientInRecipe.Field<double>("Quantity");
+                                    quantity = 0;
+                                    break;
+                                }
+                                else
+                                {
+                                    quantity -= ingredient.Quantity;
+                                    ingredient.Quantity = 0;
+                                }
+                            }
+                        }
+                        if (quantity > 0)
+                        {
+                            notFoundFood.Add(new IngredientSimple(ingredientInRecipe.Field<int>("IdFood"), quantity, Recipe.Field<DateTime>("Date"), ingredientInRecipe.Field<string>("Name")));
+                        }
+                    }
+
+                }
+            }
+
+            if (notFoundFood.Count == 0)
+                MessageBox.Show("You have everything to make all meals", "Shopping list not needed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            else
+            {
+                notFoundFood.Sort();
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+                saveFileDialog.RestoreDirectory = true;
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (Stream s = File.Open(saveFileDialog.FileName, FileMode.Truncate))
+                    using (StreamWriter sw = new StreamWriter(s))
+                    {
+                        foreach (IngredientSimple item in notFoundFood)
+                        {
+                            sw.Write(item.Name + " -  " + item.Quantity + Environment.NewLine);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
-///Max Meal date is set to 2099y. so all Null values
+///Max Meal date is set to 2099y. so all Null values are 2100y

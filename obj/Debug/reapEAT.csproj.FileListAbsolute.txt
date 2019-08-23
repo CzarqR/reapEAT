@@ -16,3 +16,9 @@ C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Properties.Resources.reso
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.AddNewRecipe.resources
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Menu.resources
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.ForgetPassword.resources
+C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.exe.manifest
+C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.application
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.exe.manifest
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.application
+C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.exe.CodeAnalysisLog.xml
+C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.exe.lastcodeanalysissucceeded

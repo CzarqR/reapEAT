@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2019\enterprise\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="16.0">
+ <Targets>
+  <Target Name="C:\Programowanie Projekty\C#\reapEAT\bin\Debug\reapEAT.exe">
+   <Modules>
+    <Module Name="reapeat.exe">
+     <Namespaces>
+      <Namespace Name="reapEAT">
+       <Types>
+        <Type Name="AddNewRecipe" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ButAdd_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="AddNewRecipe.cs" Line="305">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'AddNewRecipe.ButAdd_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 305</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="AddNewRecipe.cs" Line="318">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'AddNewRecipe.ButAdd_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 318</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="AddNewRecipe.cs" Line="330">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'AddNewRecipe.ButAdd_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 330, 332</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="AddNewRecipe.cs" Line="326">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'AddNewRecipe.ButAdd_Click(object, EventArgs)' może zawierać następujące zmienne: 'idRecipe', 'ingredient.IdFood', 'ingredient.Quantity'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadIngridients(System.String)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="AddNewRecipe.cs" Line="125">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'AddNewRecipe.LoadIngridients(string)' może zawierać następujące zmienne: 'query'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Diet" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ButConfirm_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="457">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Diet.ButConfirm_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 457</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="475">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Diet.ButConfirm_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 475</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="449">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Diet.ButConfirm_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.txtName.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="432">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.ButConfirm_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.txtName.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="462">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.ButConfirm_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.txtName.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Button1_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="363">Obiekt 's' może zostać zlikwidowany więcej niż raz w metodzie 'Diet.Button1_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 363</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="314">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.Button1_Click(object, EventArgs)' może zawierać następujące zmienne: 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")', 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")', 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")', 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="267">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.Button1_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'X.IdUser', 'X.IdUser', 'X.IdUser', 'X.IdUser'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="306">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.Button1_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.FindKey(this.UserDiets, Diet.ToString())', 'Local14.ToString("yyyy.MM.dd")', 'Local14.ToString("yyyy.MM.dd")'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Button1_Click_1(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="608">Obiekt 's' może zostać zlikwidowany więcej niż raz w metodzie 'Diet.Button1_Click_1(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 608</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="559">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.Button1_Click_1(object, EventArgs)' może zawierać następujące zmienne: 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")', 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")', 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")', 'DataRowExtensions.Field&lt;int&gt;(Recipe, "IdRecipe")'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="512">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.Button1_Click_1(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'X.IdUser', 'X.IdUser', 'X.IdUser', 'X.IdUser'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="551">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.Button1_Click_1(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.FindKey(this.UserDiets, Diet.ToString())', 'Local14.ToString("yyyy.MM.dd")', 'Local14.ToString("yyyy.MM.dd")'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#DeleteToolStripMenuItem_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="229">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Diet.DeleteToolStripMenuItem_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 229</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="209">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Diet.DeleteToolStripMenuItem_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.listVDiets.SelectedItems[0].SubItems[1].Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="215">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Diet.DeleteToolStripMenuItem_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.listVDiets.SelectedItems[0].SubItems[1].Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#DeleteToolStripMenuItem1_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="198">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Diet.DeleteToolStripMenuItem1_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 198</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="191">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Diet.DeleteToolStripMenuItem1_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.idDiet', 'this.listVDiet.SelectedItems[0].SubItems[3].Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadDiet()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Diet.cs" Line="111">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Diet.LoadDiet()' może zawierać następujące zmienne: 'X.IdUser', 'this.idDiet', 'X.IdUser', 'this.idDiet', 'X.IdUser', 'this.idDiet', 'X.IdUser', 'this.idDiet', 'X.IdUser', 'this.idDiet', 'X.IdUser', 'this.idDiet'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="FindIngridient" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#LookFor(System.Int32,System.Int32)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="FindIngridient.cs" Line="24">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'FindIngridient.LookFor(int, int)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 24</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="FindIngridient.cs" Line="17">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'FindIngridient.LookFor(int, int)' może zawierać następujące zmienne: 'idRecipe', 'idFood'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ForgetPassword" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Button1_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="ForgetPassword.cs" Line="27">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'ForgetPassword.Button1_Click(object, EventArgs)' może zawierać następujące zmienne: 'this.textBox1.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Fridge" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#ButAll_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="833">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Fridge.ButAll_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 833</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="826">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Fridge.ButAll_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.IdToEdit'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ButConfirm_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="199">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Fridge.ButConfirm_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 199</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="180">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Fridge.ButConfirm_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'DataRowExtensions.Field&lt;int&gt;(this.dataTableFoundFood.Rows[this.comBFoundFood.SelectedIndex], "IdFood")', 'this.quantity', ''.'', 'this.date', 'this.comment'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="167">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Fridge.ButConfirm_Click(object, EventArgs)' może zawierać następujące zmienne: 'this.queryFridge', 'X.IdUser', 'DataRowExtensions.Field&lt;int&gt;(this.dataTableFoundFood.Rows[this.comBFoundFood.SelectedIndex], "IdFood")'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ButConfirm_Click_1(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="688">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Fridge.ButConfirm_Click_1(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 688</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="681">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Fridge.ButConfirm_Click_1(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.quantity', 'this.date', 'this.comment', 'this.listVFridge.SelectedItems[0].SubItems[4].Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ButJustAdd_Click(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="551">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Fridge.ButJustAdd_Click(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 551</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="544">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Fridge.ButJustAdd_Click(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'DataRowExtensions.Field&lt;int&gt;(this.dataTableFoundFood.Rows[this.comBFoundFood.SelectedIndex], "IdFood")', 'this.quantity', ''.'', 'this.date', 'this.comment'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#DeleteFood()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="458">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Fridge.DeleteFood()'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 458</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="451">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Fridge.DeleteFood()' może zawierać następujące zmienne: 'X.IdUser', 'item.SubItems[4].Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ListVSameFood_DoubleClick(System.Object,System.EventArgs)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="403">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Fridge.ListVSameFood_DoubleClick(object, EventArgs)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 403</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="396">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Fridge.ListVSameFood_DoubleClick(object, EventArgs)' może zawierać następujące zmienne: 'X.IdUser', 'this.quantity', 'this.date', 'this.comment', 'this.listVSameFood.SelectedItems[0].SubItems[4].Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadDBToListView(System.String)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="51">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Fridge.LoadDBToListView(string)' może zawierać następujące zmienne: 'query'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#SearchFood()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="250">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Fridge.SearchFood()' może zawierać następujące zmienne: 'this.txtFoodToFind.Text', 'this.txtFoodToFind.Text', '' ''. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#TakeOutFood()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="755">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Fridge.TakeOutFood()' może zawierać następujące zmienne: 'this.txtFoodToFind.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#UpdateValue(System.Int32,System.Double)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="349">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Fridge.UpdateValue(int, double)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 349</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Fridge.cs" Line="342">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'Fridge.UpdateValue(int, double)' może zawierać następujące zmienne: 'X.IdUser', 'base.ToString()', ''.'', 'IdRowInFridge'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="LoadDB" Kind="Class" Accessibility="Assembly" ExternallyVisible="False">
+         <Members>
+          <Member Name="#LoadDBByte(System.String,System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="LoadDB.cs" Line="26">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'LoadDB.LoadDBByte(string, string, string)' może zawierać następujące zmienne: 'db'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadDInt(System.String,System.String,System.String)" Kind="Method" Static="True" Accessibility="Public" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="LoadDB.cs" Line="43">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'LoadDB.LoadDInt(string, string, string)' może zawierać następujące zmienne: 'db'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Login" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#LogIn()" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Login.cs" Line="71">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Login.LogIn()'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 71</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Login.cs" Line="242">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'Login.LogIn()'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 242</Issue>
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Login.cs" Line="94">Obiekt 'this' może zostać zlikwidowany więcej niż raz w metodzie 'Login.LogIn()'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 94</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Login.cs" Line="132">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Login.LogIn()' może zawierać następujące zmienne: 'this.txtEmail.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Login.cs" Line="156">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Login.LogIn()' może zawierać następujące zmienne: 'this.txtNick.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Login.cs" Line="85">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Login.LogIn()' może zawierać następujące zmienne: 'this.txtNick.Text', 'this.txtPass.Text'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Main" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#LoadDBToListView(System.String)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Main.cs" Line="222">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Main.LoadDBToListView(string)' może zawierać następujące zmienne: 'query'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadIngridients(System.String)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Main.cs" Line="293">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Main.LoadIngridients(string)' może zawierać następujące zmienne: 'query'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="MealSearcher" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#AddMeal(System.Int32,System.DateTime)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="MealSearcher.cs" Line="498">Obiekt 'sqlConnection' może zostać zlikwidowany więcej niż raz w metodzie 'MealSearcher.AddMeal(int, DateTime)'. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 498</Issue>
+            </Message>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="MealSearcher.cs" Line="491">Ciąg zapytania przekazany do elementu 'SqlCommand.SqlCommand(string, SqlConnection)' w 'MealSearcher.AddMeal(int, DateTime)' może zawierać następujące zmienne: 'X.IdUser', 'this.idDiet', 'id', 'date.ToString("yyyy.MM.dd hh:mm:ss")', 'base.ToString()', ''.''. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadDBToListView(System.String)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="MealSearcher.cs" Line="234">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'MealSearcher.LoadDBToListView(string)' może zawierać następujące zmienne: 'query'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#LoadIngridients(System.String)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="MealSearcher.cs" Line="305">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'MealSearcher.LoadIngridients(string)' może zawierać następujące zmienne: 'query'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Recipe" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#LoadDBToTB(System.Int32)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100" Status="Active" Created="2019-08-23 23:11:07Z" FixCategory="DependsOnFix">
+             <Issue Name="WithNonLiterals" Certainty="75" Level="Warning" Path="C:\Programowanie Projekty\C#\reapEAT" File="Recipe.cs" Line="164">Ciąg zapytania przekazany do elementu 'SqlDataAdapter.SqlDataAdapter(string, SqlConnection)' w 'Recipe.LoadDBToTB(int)' może zawierać następujące zmienne: 'id', 'id', 'id'. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="Nie likwiduj wielokrotnie obiektów" Category="Microsoft.Usage" CheckId="CA2202">
+   <Name>Nie likwiduj wielokrotnie obiektów</Name>
+   <Description>Poprawnie zaimplementowana metoda Dispose może zostać wywołana wiele razy bez zgłoszenia wyjątku. Nie jest to jednak gwarantowane, więc aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.</Description>
+   <Resolution Name="Default">Obiekt {0} może zostać zlikwidowany więcej niż raz w metodzie {1}. Aby uniknąć generowania wyjątku System.ObjectDisposedException, metoda Dispose nie powinna być wywoływana dla obiektu więcej niż raz.: Lines: 498</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182334.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="16.0.0.0" />
+  </Rule>
+  <Rule TypeName="Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach" Category="Microsoft.Security" CheckId="CA2100">
+   <Name>Sprawdź zapytania SQL pod kątem luk w zabezpieczeniach</Name>
+   <Description>Ciąg polecenia SQL utworzony na podstawie danych wejściowych użytkownika jest podatny na ataki polegające na wstrzyknięciu kodu SQL. Program Microsoft SQL Server i inne serwery baz danych obsługują procedury składowane i sparametryzowane zapytania SQL, które zmniejszają ryzyko ataków polegających na wstrzyknięciu kodu.</Description>
+   <Resolution Name="WithNonLiterals">Ciąg zapytania przekazany do elementu {0} w {1} może zawierać następujące zmienne: {2}. Jeśli dowolna z tych zmiennych może pochodzić z danych podawanych przez użytkownika, rozważ użycie procedury składowanej lub sparametryzowanego zapytania SQL zamiast tworzenia zapytania przez łączenie ciągów.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182310.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="16.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Kategoria</String>
+  <String Key="Certainty">Pewność</String>
+  <String Key="CollapseAll">Zwiń wszystko</String>
+  <String Key="CheckId">Identyfikator testu</String>
+  <String Key="Error">Błąd</String>
+  <String Key="Errors">błędy</String>
+  <String Key="ExpandAll">Rozwiń wszystko</String>
+  <String Key="Help">Pomoc</String>
+  <String Key="Line">Wiersz</String>
+  <String Key="Messages">komunikaty</String>
+  <String Key="LocationNotStoredInPdb">[Lokalizacja nie jest przechowywana w pliku PDB]</String>
+  <String Key="Project">Projekt</String>
+  <String Key="Resolution">Rozwiązanie</String>
+  <String Key="Rule">Reguła</String>
+  <String Key="RuleFile">Plik reguł</String>
+  <String Key="RuleDescription">Opis reguły</String>
+  <String Key="Source">Źródło</String>
+  <String Key="Status">Stan</String>
+  <String Key="Target">Element docelowy</String>
+  <String Key="Warning">Ostrzeżenie</String>
+  <String Key="Warnings">ostrzeżenia</String>
+  <String Key="ReportTitle">Raport z analizy kodu</String>
+ </Localized>
+</FxCopReport>

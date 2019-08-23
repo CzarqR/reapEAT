@@ -38,6 +38,7 @@
             this.listVDiet = new System.Windows.Forms.ListView();
             this.columnNameD = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnPortion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.conMenDiet = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.columnPortion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.conMenDiets.SuspendLayout();
             this.conMenDiet.SuspendLayout();
             this.SuspendLayout();
@@ -143,6 +143,10 @@
             // 
             this.columnDate.Text = "Date";
             this.columnDate.Width = 78;
+            // 
+            // columnPortion
+            // 
+            this.columnPortion.Text = "Portion";
             // 
             // imageList
             // 
@@ -354,10 +358,7 @@
             this.button1.TabIndex = 55;
             this.button1.Text = "Detailed shopping List";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // columnPortion
-            // 
-            this.columnPortion.Text = "Portion";
+            this.button1.Click += new System.EventHandler(this.Button1_Click_1);
             // 
             // Diet
             // 

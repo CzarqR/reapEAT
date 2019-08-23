@@ -167,10 +167,10 @@
             0,
             0});
             this.numPortion.Minimum = new decimal(new int[] {
-            1,
+            25,
             0,
             0,
-            0});
+            131072});
             this.numPortion.Name = "numPortion";
             this.numPortion.Size = new System.Drawing.Size(44, 16);
             this.numPortion.TabIndex = 11;
