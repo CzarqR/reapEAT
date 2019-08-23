@@ -13,11 +13,6 @@ namespace reapEAT
         public double Quantity;
         public int Calories;
 
-        public Ingredient()
-        {
-
-        }
-
         public Ingredient(int IdFood, string Name, double Quantity, int Calories)
         {
             this.IdFood = IdFood;

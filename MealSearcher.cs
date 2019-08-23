@@ -257,22 +257,6 @@ namespace reapEAT
             }
         }
 
-        /// TO DO !!!!!!!!! FUNCTION THAT LL RETURN NUMBER OF ROWS IN DB FOR ACTUAL SEARCHER
-
-        //private int CountRows()
-        //{
-        //    using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
-        //    {
-
-        //        SqlCommand sqlCommandAddMeal = new SqlCommand()
-        //        {
-        //            CommandType = CommandType.Text
-        //        };
-        //        sqlConnection.Open();
-        //        sqlCommandAddMeal.ExecuteNonQuery();
-        //        sqlConnection.Close();
-        //    }
-        //}
 
         private void Search()
         {

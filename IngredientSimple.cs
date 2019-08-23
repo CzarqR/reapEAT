@@ -13,11 +13,6 @@ namespace reapEAT
         public DateTime ExpirationDate;
         public string Name;
 
-        public IngredientSimple()
-        {
-
-        }
-
         public IngredientSimple(int IdFood, double Quantity, DateTime ExpirationDate, string name)
         {
             this.IdFood = IdFood;

@@ -46,7 +46,7 @@ namespace reapEAT
         public Main()
         {
             InitializeComponent();
-            this.ClientSize = new System.Drawing.Size(818, 568);
+            this.ClientSize = new System.Drawing.Size(818, 575);
 
 
             /// FoodType load
@@ -245,22 +245,6 @@ namespace reapEAT
             }
         }
 
-        /// TO DO !!!!!!!!! FUNCTION THAT LL RETURN NUMBER OF ROWS IN DB FOR ACTUAL SEARCHER
-
-        //private int CountRows()
-        //{
-        //    using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
-        //    {
-
-        //        SqlCommand sqlCommandAddMeal = new SqlCommand()
-        //        {
-        //            CommandType = CommandType.Text
-        //        };
-        //        sqlConnection.Open();
-        //        sqlCommandAddMeal.ExecuteNonQuery();
-        //        sqlConnection.Close();
-        //    }
-        //}
 
         private void Search()
         {
@@ -426,7 +410,7 @@ namespace reapEAT
             else
             {
 
-                this.ClientSize = new System.Drawing.Size(818, 568);
+                this.ClientSize = new System.Drawing.Size(818, 575);
                 butShowFilters.Text = "Show filters";
 
             }
@@ -443,6 +427,8 @@ namespace reapEAT
 
         private void Button2_Click(object sender, EventArgs e)
         {
+            txtSearchIngr.Text = "";
+            chBVerified.Checked = false;
             chLBDiet.SetItemChecked(0, false);
             txtCalMax.Text = "";
             txtCalMin.Text = "";
@@ -492,6 +478,14 @@ namespace reapEAT
             if (e.KeyChar == (char)Keys.Enter) /// Enter barcode
             {
                 Search();
+            }
+        }
+
+        private void TxtSearchIngr_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter) /// Enter barcode
+            {
+                LoadIngridients(" where Name like '%" + txtSearchIngr.Text + "%'");
             }
         }
     }

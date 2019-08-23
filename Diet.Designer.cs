@@ -58,6 +58,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.columnPortion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.conMenDiets.SuspendLayout();
             this.conMenDiet.SuspendLayout();
             this.SuspendLayout();
@@ -102,6 +103,8 @@
             // butAddNewDiet
             // 
             this.butAddNewDiet.BackColor = System.Drawing.Color.SandyBrown;
+            this.butAddNewDiet.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.butAddNewDiet.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butAddNewDiet.Location = new System.Drawing.Point(139, 32);
             this.butAddNewDiet.Name = "butAddNewDiet";
             this.butAddNewDiet.Size = new System.Drawing.Size(113, 27);
@@ -115,7 +118,8 @@
             this.listVDiet.BackColor = System.Drawing.Color.SandyBrown;
             this.listVDiet.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnNameD,
-            this.columnDate});
+            this.columnDate,
+            this.columnPortion});
             this.listVDiet.FullRowSelect = true;
             this.listVDiet.HideSelection = false;
             this.listVDiet.LargeImageList = this.imageList;
@@ -133,12 +137,12 @@
             // columnNameD
             // 
             this.columnNameD.Text = "Name";
-            this.columnNameD.Width = 184;
+            this.columnNameD.Width = 167;
             // 
             // columnDate
             // 
             this.columnDate.Text = "Date";
-            this.columnDate.Width = 89;
+            this.columnDate.Width = 78;
             // 
             // imageList
             // 
@@ -171,6 +175,8 @@
             // butAddMeal
             // 
             this.butAddMeal.BackColor = System.Drawing.Color.SandyBrown;
+            this.butAddMeal.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.butAddMeal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butAddMeal.Location = new System.Drawing.Point(322, 186);
             this.butAddMeal.Name = "butAddMeal";
             this.butAddMeal.Size = new System.Drawing.Size(90, 27);
@@ -204,6 +210,8 @@
             // butShopList
             // 
             this.butShopList.BackColor = System.Drawing.Color.SandyBrown;
+            this.butShopList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.butShopList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butShopList.Location = new System.Drawing.Point(322, 374);
             this.butShopList.Name = "butShopList";
             this.butShopList.Size = new System.Drawing.Size(147, 28);
@@ -257,6 +265,8 @@
             // butReturn
             // 
             this.butReturn.BackColor = System.Drawing.Color.SandyBrown;
+            this.butReturn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.butReturn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butReturn.Location = new System.Drawing.Point(258, 32);
             this.butReturn.Name = "butReturn";
             this.butReturn.Size = new System.Drawing.Size(59, 27);
@@ -290,6 +300,8 @@
             // butConfirm
             // 
             this.butConfirm.BackColor = System.Drawing.Color.SandyBrown;
+            this.butConfirm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.butConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butConfirm.Location = new System.Drawing.Point(139, 90);
             this.butConfirm.Name = "butConfirm";
             this.butConfirm.Size = new System.Drawing.Size(113, 27);
@@ -334,12 +346,18 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.SandyBrown;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Location = new System.Drawing.Point(471, 374);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 28);
             this.button1.TabIndex = 55;
             this.button1.Text = "Detailed shopping List";
             this.button1.UseVisualStyleBackColor = false;
+            // 
+            // columnPortion
+            // 
+            this.columnPortion.Text = "Portion";
             // 
             // Diet
             // 
@@ -409,5 +427,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ColumnHeader columnPortion;
     }
 }

@@ -40,18 +40,20 @@
             // 
             // butMeal
             // 
-            this.butMeal.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("butMeal.BackgroundImage")));
+            this.butMeal.BackColor = System.Drawing.Color.HotPink;
             this.butMeal.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.butMeal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.butMeal.Font = new System.Drawing.Font("Microsoft Tai Le", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butMeal.Location = new System.Drawing.Point(12, 12);
             this.butMeal.Name = "butMeal";
             this.butMeal.Size = new System.Drawing.Size(260, 141);
             this.butMeal.TabIndex = 0;
-            this.butMeal.UseVisualStyleBackColor = true;
+            this.butMeal.Text = "Find Meal";
+            this.butMeal.UseVisualStyleBackColor = false;
             this.butMeal.Click += new System.EventHandler(this.ButMeal_Click);
             // 
             // butCredits
             // 
+            this.butCredits.Font = new System.Drawing.Font("Microsoft Tai Le", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butCredits.Location = new System.Drawing.Point(278, 12);
             this.butCredits.Name = "butCredits";
             this.butCredits.Size = new System.Drawing.Size(98, 97);
@@ -62,29 +64,33 @@
             // 
             // butFridge
             // 
-            this.butFridge.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("butFridge.BackgroundImage")));
+            this.butFridge.BackColor = System.Drawing.Color.RoyalBlue;
             this.butFridge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.butFridge.Font = new System.Drawing.Font("Microsoft Tai Le", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butFridge.Location = new System.Drawing.Point(184, 159);
             this.butFridge.Name = "butFridge";
             this.butFridge.Size = new System.Drawing.Size(284, 111);
             this.butFridge.TabIndex = 2;
             this.butFridge.Text = "Fridge";
-            this.butFridge.UseVisualStyleBackColor = true;
+            this.butFridge.UseVisualStyleBackColor = false;
             this.butFridge.Click += new System.EventHandler(this.ButFridge_Click);
             // 
             // butDiets
             // 
-            this.butDiets.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("butDiets.BackgroundImage")));
+            this.butDiets.BackColor = System.Drawing.Color.Crimson;
             this.butDiets.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.butDiets.Font = new System.Drawing.Font("Microsoft Tai Le", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butDiets.Location = new System.Drawing.Point(12, 159);
             this.butDiets.Name = "butDiets";
             this.butDiets.Size = new System.Drawing.Size(166, 111);
             this.butDiets.TabIndex = 1;
-            this.butDiets.UseVisualStyleBackColor = true;
+            this.butDiets.Text = "Diet";
+            this.butDiets.UseVisualStyleBackColor = false;
             this.butDiets.Click += new System.EventHandler(this.ButDiets_Click);
             // 
             // butSettings
             // 
+            this.butSettings.Font = new System.Drawing.Font("Microsoft Tai Le", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butSettings.Location = new System.Drawing.Point(278, 115);
             this.butSettings.Name = "butSettings";
             this.butSettings.Size = new System.Drawing.Size(98, 38);
@@ -95,6 +101,7 @@
             // 
             // butProfile
             // 
+            this.butProfile.Font = new System.Drawing.Font("Microsoft Tai Le", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butProfile.Location = new System.Drawing.Point(382, 49);
             this.butProfile.Name = "butProfile";
             this.butProfile.Size = new System.Drawing.Size(86, 104);
@@ -105,6 +112,7 @@
             // 
             // butLogOut
             // 
+            this.butLogOut.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.butLogOut.Location = new System.Drawing.Point(382, 12);
             this.butLogOut.Name = "butLogOut";
             this.butLogOut.Size = new System.Drawing.Size(86, 31);

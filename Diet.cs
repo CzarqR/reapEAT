@@ -121,8 +121,8 @@ namespace reapEAT
                     ListViewItem item = new ListViewItem(row.Field<string>("Name"));
                     item.SubItems.Add(row.Field<DateTime>("Date").ToString("hh:mm dd.MM.yyy"));
 
-                    item.SubItems.Add(row.Field<int>("IdMeal").ToString());
                     item.SubItems.Add(row.Field<double>("Portion").ToString());
+                    item.SubItems.Add(row.Field<int>("IdMeal").ToString());
                     item.SubItems.Add(row.Field<Int32>("IdRecipes").ToString());
                     imageList.Images.Add(row.Field<Int32>("IdRecipes").ToString(), Image.FromStream(new MemoryStream(row.Field<byte[]>("Image"))));
                     item.ImageKey = row.Field<Int32>("IdRecipes").ToString();
@@ -178,14 +178,25 @@ namespace reapEAT
         /// Edit meal in diet
         private void EditToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Console.WriteLine(listVDiet.SelectedItems[0].SubItems[2].Text);
+            MessageBox.Show("Editing diet not made yet ", "Edit recipe", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //Console.WriteLine(listVDiet.SelectedItems[0].SubItems[2].Text);
         }
 
         /// Delete meal in diet
         private void DeleteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(listVDiet.SelectedItems[0].SubItems[2].Text);
-
+            string query = "DELETE FROM [" + X.IdUser + "_" + idDiet + "_diet] WHERE IdMeal = " + listVDiet.SelectedItems[0].SubItems[3].Text;
+            using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+            {
+                SqlCommand sqlDeleteMealFromDiet = new SqlCommand(query, sqlConnection)
+                {
+                    CommandType = CommandType.Text
+                };
+                sqlConnection.Open();
+                sqlDeleteMealFromDiet.ExecuteNonQuery();
+                sqlConnection.Close();
+            }
+            LoadDiet();
         }
 
         /// Delete diet
@@ -239,7 +250,8 @@ namespace reapEAT
 
         private void ListVDiet_DoubleClick(object sender, EventArgs e)
         {
-            Recipe recipe = new Recipe(int.Parse(listVDiet.SelectedItems[0].SubItems[4].Text), double.Parse(listVDiet.SelectedItems[0].SubItems[3].Text));
+            Console.WriteLine(double.Parse(listVDiet.SelectedItems[0].SubItems[2].Text));
+            Recipe recipe = new Recipe(int.Parse(listVDiet.SelectedItems[0].SubItems[4].Text), double.Parse(listVDiet.SelectedItems[0].SubItems[2].Text));
             recipe.Show();
         }
 

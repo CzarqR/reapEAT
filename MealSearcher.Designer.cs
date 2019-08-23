@@ -214,9 +214,10 @@
             // 
             this.txtSearch.BackColor = System.Drawing.Color.LemonChiffon;
             this.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtSearch.Location = new System.Drawing.Point(200, 12);
-            this.txtSearch.MaxLength = 50;
+            this.txtSearch.MaxLength = 30;
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(235, 26);
             this.txtSearch.TabIndex = 2;
@@ -226,6 +227,7 @@
             // 
             this.butSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.butSearch.BackColor = System.Drawing.Color.SandyBrown;
+            this.butSearch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.butSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butSearch.Location = new System.Drawing.Point(77, 12);
             this.butSearch.Name = "butSearch";
@@ -299,6 +301,7 @@
             // 
             this.butSearchIngr.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.butSearchIngr.BackColor = System.Drawing.Color.SandyBrown;
+            this.butSearchIngr.Cursor = System.Windows.Forms.Cursors.Hand;
             this.butSearchIngr.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butSearchIngr.Location = new System.Drawing.Point(818, 322);
             this.butSearchIngr.Name = "butSearchIngr";
@@ -314,6 +317,7 @@
             this.txtSearchIngr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtSearchIngr.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.txtSearchIngr.Location = new System.Drawing.Point(901, 323);
+            this.txtSearchIngr.MaxLength = 30;
             this.txtSearchIngr.Name = "txtSearchIngr";
             this.txtSearchIngr.Size = new System.Drawing.Size(147, 24);
             this.txtSearchIngr.TabIndex = 17;
@@ -321,6 +325,7 @@
             // butAddNewRec
             // 
             this.butAddNewRec.BackColor = System.Drawing.Color.SandyBrown;
+            this.butAddNewRec.Cursor = System.Windows.Forms.Cursors.Hand;
             this.butAddNewRec.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butAddNewRec.Location = new System.Drawing.Point(441, 12);
             this.butAddNewRec.Name = "butAddNewRec";
@@ -364,6 +369,7 @@
             // 
             this.lblPrev.AutoSize = true;
             this.lblPrev.BackColor = System.Drawing.Color.SandyBrown;
+            this.lblPrev.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblPrev.Location = new System.Drawing.Point(570, 16);
             this.lblPrev.Name = "lblPrev";
             this.lblPrev.Size = new System.Drawing.Size(60, 13);
@@ -375,6 +381,7 @@
             // 
             this.lblNext.AutoSize = true;
             this.lblNext.BackColor = System.Drawing.Color.SandyBrown;
+            this.lblNext.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lblNext.Location = new System.Drawing.Point(681, 16);
             this.lblNext.Name = "lblNext";
             this.lblNext.Size = new System.Drawing.Size(41, 13);
@@ -385,6 +392,7 @@
             // butShowFilters
             // 
             this.butShowFilters.BackColor = System.Drawing.Color.SandyBrown;
+            this.butShowFilters.Cursor = System.Windows.Forms.Cursors.Hand;
             this.butShowFilters.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butShowFilters.Location = new System.Drawing.Point(728, 14);
             this.butShowFilters.Name = "butShowFilters";
@@ -397,6 +405,7 @@
             // butHideFilters
             // 
             this.butHideFilters.BackColor = System.Drawing.Color.SandyBrown;
+            this.butHideFilters.Cursor = System.Windows.Forms.Cursors.Hand;
             this.butHideFilters.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butHideFilters.Location = new System.Drawing.Point(980, 517);
             this.butHideFilters.Name = "butHideFilters";
@@ -431,6 +440,7 @@
             // 
             this.butAddMeal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.butAddMeal.BackColor = System.Drawing.Color.SandyBrown;
+            this.butAddMeal.Cursor = System.Windows.Forms.Cursors.Hand;
             this.butAddMeal.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.butAddMeal.Location = new System.Drawing.Point(266, 563);
             this.butAddMeal.Name = "butAddMeal";

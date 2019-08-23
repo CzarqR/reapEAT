@@ -55,6 +55,13 @@
             this.butJustAdd = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.butConfirm = new System.Windows.Forms.Button();
+            this.butTakeOut = new System.Windows.Forms.Button();
+            this.butAll = new System.Windows.Forms.Button();
+            this.but1o2 = new System.Windows.Forms.Button();
+            this.but1o4 = new System.Windows.Forms.Button();
+            this.but1o3 = new System.Windows.Forms.Button();
+            this.txtNewQuantEdit = new System.Windows.Forms.TextBox();
+            this.butConfNewEdit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listVFridge
@@ -129,9 +136,9 @@
             this.txtFoodToFind.BackColor = System.Drawing.Color.LemonChiffon;
             this.txtFoodToFind.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFoodToFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.txtFoodToFind.Location = new System.Drawing.Point(508, 60);
+            this.txtFoodToFind.Location = new System.Drawing.Point(514, 60);
             this.txtFoodToFind.Name = "txtFoodToFind";
-            this.txtFoodToFind.Size = new System.Drawing.Size(186, 21);
+            this.txtFoodToFind.Size = new System.Drawing.Size(142, 21);
             this.txtFoodToFind.TabIndex = 6;
             this.txtFoodToFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtBarcode_KeyPress);
             // 
@@ -171,7 +178,7 @@
             // lblQuantity
             // 
             this.lblQuantity.AutoSize = true;
-            this.lblQuantity.Location = new System.Drawing.Point(399, 134);
+            this.lblQuantity.Location = new System.Drawing.Point(402, 134);
             this.lblQuantity.Name = "lblQuantity";
             this.lblQuantity.Size = new System.Drawing.Size(49, 13);
             this.lblQuantity.TabIndex = 10;
@@ -181,7 +188,7 @@
             // lblComment
             // 
             this.lblComment.AutoSize = true;
-            this.lblComment.Location = new System.Drawing.Point(399, 163);
+            this.lblComment.Location = new System.Drawing.Point(402, 163);
             this.lblComment.Name = "lblComment";
             this.lblComment.Size = new System.Drawing.Size(54, 13);
             this.lblComment.TabIndex = 11;
@@ -191,7 +198,7 @@
             // lblExpirationDate
             // 
             this.lblExpirationDate.AutoSize = true;
-            this.lblExpirationDate.Location = new System.Drawing.Point(399, 192);
+            this.lblExpirationDate.Location = new System.Drawing.Point(402, 192);
             this.lblExpirationDate.Name = "lblExpirationDate";
             this.lblExpirationDate.Size = new System.Drawing.Size(82, 13);
             this.lblExpirationDate.TabIndex = 12;
@@ -211,7 +218,7 @@
             // lblFoundFood
             // 
             this.lblFoundFood.AutoSize = true;
-            this.lblFoundFood.Location = new System.Drawing.Point(398, 105);
+            this.lblFoundFood.Location = new System.Drawing.Point(402, 105);
             this.lblFoundFood.Name = "lblFoundFood";
             this.lblFoundFood.Size = new System.Drawing.Size(64, 13);
             this.lblFoundFood.TabIndex = 14;
@@ -222,7 +229,7 @@
             // 
             this.butChechAdd.BackColor = System.Drawing.Color.SandyBrown;
             this.butChechAdd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.butChechAdd.Location = new System.Drawing.Point(499, 223);
+            this.butChechAdd.Location = new System.Drawing.Point(497, 223);
             this.butChechAdd.Name = "butChechAdd";
             this.butChechAdd.Size = new System.Drawing.Size(90, 35);
             this.butChechAdd.TabIndex = 15;
@@ -239,7 +246,7 @@
             this.comBFoundFood.FormattingEnabled = true;
             this.comBFoundFood.Location = new System.Drawing.Point(468, 97);
             this.comBFoundFood.Name = "comBFoundFood";
-            this.comBFoundFood.Size = new System.Drawing.Size(146, 21);
+            this.comBFoundFood.Size = new System.Drawing.Size(182, 21);
             this.comBFoundFood.TabIndex = 17;
             this.comBFoundFood.Visible = false;
             this.comBFoundFood.SelectedIndexChanged += new System.EventHandler(this.ComBFoundFood_SelectedIndexChanged);
@@ -254,7 +261,7 @@
             this.columnHeader4});
             this.listVSameFood.FullRowSelect = true;
             this.listVSameFood.HideSelection = false;
-            this.listVSameFood.Location = new System.Drawing.Point(402, 264);
+            this.listVSameFood.Location = new System.Drawing.Point(402, 97);
             this.listVSameFood.Name = "listVSameFood";
             this.listVSameFood.Size = new System.Drawing.Size(363, 129);
             this.listVSameFood.TabIndex = 18;
@@ -326,7 +333,7 @@
             // 
             this.butConfirm.BackColor = System.Drawing.Color.SandyBrown;
             this.butConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.butConfirm.Location = new System.Drawing.Point(401, 223);
+            this.butConfirm.Location = new System.Drawing.Point(402, 223);
             this.butConfirm.Name = "butConfirm";
             this.butConfirm.Size = new System.Drawing.Size(90, 35);
             this.butConfirm.TabIndex = 22;
@@ -335,12 +342,107 @@
             this.butConfirm.Visible = false;
             this.butConfirm.Click += new System.EventHandler(this.ButConfirm_Click_1);
             // 
+            // butTakeOut
+            // 
+            this.butTakeOut.BackColor = System.Drawing.Color.SandyBrown;
+            this.butTakeOut.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butTakeOut.Location = new System.Drawing.Point(665, 53);
+            this.butTakeOut.Name = "butTakeOut";
+            this.butTakeOut.Size = new System.Drawing.Size(100, 35);
+            this.butTakeOut.TabIndex = 23;
+            this.butTakeOut.Text = "Take out food";
+            this.butTakeOut.UseVisualStyleBackColor = false;
+            this.butTakeOut.Click += new System.EventHandler(this.ButTakeOut_Click);
+            // 
+            // butAll
+            // 
+            this.butAll.BackColor = System.Drawing.Color.SandyBrown;
+            this.butAll.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butAll.Location = new System.Drawing.Point(402, 229);
+            this.butAll.Name = "butAll";
+            this.butAll.Size = new System.Drawing.Size(51, 21);
+            this.butAll.TabIndex = 24;
+            this.butAll.Text = "All";
+            this.butAll.UseVisualStyleBackColor = false;
+            this.butAll.Visible = false;
+            this.butAll.Click += new System.EventHandler(this.ButAll_Click);
+            // 
+            // but1o2
+            // 
+            this.but1o2.BackColor = System.Drawing.Color.SandyBrown;
+            this.but1o2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.but1o2.Location = new System.Drawing.Point(459, 230);
+            this.but1o2.Name = "but1o2";
+            this.but1o2.Size = new System.Drawing.Size(51, 21);
+            this.but1o2.TabIndex = 25;
+            this.but1o2.Text = "1/2";
+            this.but1o2.UseVisualStyleBackColor = false;
+            this.but1o2.Visible = false;
+            this.but1o2.Click += new System.EventHandler(this.But1o2_Click);
+            // 
+            // but1o4
+            // 
+            this.but1o4.BackColor = System.Drawing.Color.SandyBrown;
+            this.but1o4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.but1o4.Location = new System.Drawing.Point(573, 229);
+            this.but1o4.Name = "but1o4";
+            this.but1o4.Size = new System.Drawing.Size(51, 21);
+            this.but1o4.TabIndex = 27;
+            this.but1o4.Text = "1/4";
+            this.but1o4.UseVisualStyleBackColor = false;
+            this.but1o4.Visible = false;
+            this.but1o4.Click += new System.EventHandler(this.But1o4_Click);
+            // 
+            // but1o3
+            // 
+            this.but1o3.BackColor = System.Drawing.Color.SandyBrown;
+            this.but1o3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.but1o3.Location = new System.Drawing.Point(516, 229);
+            this.but1o3.Name = "but1o3";
+            this.but1o3.Size = new System.Drawing.Size(51, 21);
+            this.but1o3.TabIndex = 26;
+            this.but1o3.Text = "1/3";
+            this.but1o3.UseVisualStyleBackColor = false;
+            this.but1o3.Visible = false;
+            this.but1o3.Click += new System.EventHandler(this.But1o3_Click);
+            // 
+            // txtNewQuantEdit
+            // 
+            this.txtNewQuantEdit.BackColor = System.Drawing.Color.LemonChiffon;
+            this.txtNewQuantEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtNewQuantEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.txtNewQuantEdit.Location = new System.Drawing.Point(630, 229);
+            this.txtNewQuantEdit.Name = "txtNewQuantEdit";
+            this.txtNewQuantEdit.Size = new System.Drawing.Size(64, 21);
+            this.txtNewQuantEdit.TabIndex = 28;
+            this.txtNewQuantEdit.Visible = false;
+            // 
+            // butConfNewEdit
+            // 
+            this.butConfNewEdit.BackColor = System.Drawing.Color.SandyBrown;
+            this.butConfNewEdit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butConfNewEdit.Location = new System.Drawing.Point(702, 229);
+            this.butConfNewEdit.Name = "butConfNewEdit";
+            this.butConfNewEdit.Size = new System.Drawing.Size(63, 21);
+            this.butConfNewEdit.TabIndex = 29;
+            this.butConfNewEdit.Text = "Confirm";
+            this.butConfNewEdit.UseVisualStyleBackColor = false;
+            this.butConfNewEdit.Visible = false;
+            this.butConfNewEdit.Click += new System.EventHandler(this.ButConfNewEdit_Click);
+            // 
             // Fridge
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
             this.ClientSize = new System.Drawing.Size(777, 470);
+            this.Controls.Add(this.butConfNewEdit);
+            this.Controls.Add(this.txtNewQuantEdit);
+            this.Controls.Add(this.but1o4);
+            this.Controls.Add(this.but1o3);
+            this.Controls.Add(this.but1o2);
+            this.Controls.Add(this.butAll);
+            this.Controls.Add(this.butTakeOut);
             this.Controls.Add(this.butConfirm);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.butJustAdd);
@@ -397,5 +499,12 @@
         private System.Windows.Forms.Button butJustAdd;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button butConfirm;
+        private System.Windows.Forms.Button butTakeOut;
+        private System.Windows.Forms.Button butAll;
+        private System.Windows.Forms.Button but1o2;
+        private System.Windows.Forms.Button but1o4;
+        private System.Windows.Forms.Button but1o3;
+        private System.Windows.Forms.TextBox txtNewQuantEdit;
+        private System.Windows.Forms.Button butConfNewEdit;
     }
 }

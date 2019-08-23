@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lblSwitchLogReg = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblForgetPassword = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,6 +75,7 @@
             this.txtEmail.Size = new System.Drawing.Size(125, 19);
             this.txtEmail.TabIndex = 1;
             this.txtEmail.Visible = false;
+            this.txtEmail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNick_KeyPress);
             // 
             // txtNick
             // 
@@ -80,10 +83,11 @@
             this.txtNick.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtNick.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.txtNick.Location = new System.Drawing.Point(12, 174);
-            this.txtNick.MaxLength = 10;
+            this.txtNick.MaxLength = 30;
             this.txtNick.Name = "txtNick";
             this.txtNick.Size = new System.Drawing.Size(125, 19);
             this.txtNick.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.txtNick, "Username must have a minimum of 4 letters and contain only A-Z, a-z or 0-9\r\n");
             this.txtNick.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNick_KeyPress);
             // 
             // txtPass
@@ -97,7 +101,8 @@
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(125, 19);
             this.txtPass.TabIndex = 3;
-            this.txtPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPass_KeyPress);
+            this.toolTip1.SetToolTip(this.txtPass, "The password must have a minimum of 6 letters and contain only A-Z, a - z or 0-9");
+            this.txtPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNick_KeyPress);
             // 
             // txtRepPass
             // 
@@ -111,6 +116,7 @@
             this.txtRepPass.Size = new System.Drawing.Size(125, 19);
             this.txtRepPass.TabIndex = 4;
             this.txtRepPass.Visible = false;
+            this.txtRepPass.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtNick_KeyPress);
             // 
             // lblEmail
             // 
@@ -132,6 +138,7 @@
             this.lblUsername.Size = new System.Drawing.Size(65, 15);
             this.lblUsername.TabIndex = 7;
             this.lblUsername.Text = "Username";
+            this.toolTip1.SetToolTip(this.lblUsername, "Username must have a minimum of 4 letters and contain only A-Z, a-z or 0-9\r\n");
             // 
             // lblPassword
             // 
@@ -142,6 +149,7 @@
             this.lblPassword.Size = new System.Drawing.Size(61, 15);
             this.lblPassword.TabIndex = 8;
             this.lblPassword.Text = "Password";
+            this.toolTip1.SetToolTip(this.lblPassword, "The password must have a minimum of 6 letters and contain only A-Z, a - z or 0-9");
             // 
             // lblRepeatPassword
             // 
@@ -260,7 +268,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
-            this.ClientSize = new System.Drawing.Size(370, 361);
+            this.ClientSize = new System.Drawing.Size(559, 588);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblForgetPassword);
             this.Controls.Add(this.pictureBox1);
@@ -309,6 +317,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblForgetPassword;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 
 

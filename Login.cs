@@ -111,9 +111,9 @@ namespace reapEAT
                 lblUserInfo.Visible = false;
                 lblPassInfo.Visible = false;
 
-                //try
-                //{
-                using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
+                try
+                {
+                    using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
                 {
                     string query;
                     SqlDataAdapter sqlDataAdapter;
@@ -240,12 +240,12 @@ namespace reapEAT
 ;
                     }
                 }
-                //}
-                //catch (Exception) /// Server connection problem
-                //{
-                //    MessageBox.Show("Couldn't connect to the server", "Server problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //    return;
-                //}
+                }
+                catch (Exception) /// Server connection problem
+                {
+                    MessageBox.Show("Couldn't connect to the server", "Server problem", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
         }
 
@@ -306,7 +306,8 @@ namespace reapEAT
 
         private void Label1_Click(object sender, EventArgs e)
         {
-            /// TO DO FORGET PASSWORD
+            ForgetPassword forgetPassword = new ForgetPassword();
+            forgetPassword.ShowDialog();
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -316,19 +317,10 @@ namespace reapEAT
 
         private void TxtNick_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.Enter) /// Enter barcode
+            if (e.KeyChar == (char)Keys.Enter) /// Enter press
             {
                 LogIn();
             }
-        }
-
-        private void TxtPass_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (e.KeyChar == (char)Keys.Enter) /// Enter barcode
-            {
-                LogIn();
-            }
-        }
+        }    
     }
 }

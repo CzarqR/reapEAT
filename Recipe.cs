@@ -17,6 +17,7 @@ namespace reapEAT
         private readonly List<Label> labelsIngRec = new List<Label>();
         private readonly List<Label> labelsIngFrid = new List<Label>();
         private double portion;
+        private double portionDiet;
         private bool firstLoad = false; //turn off value change event when form is loaded for the first time
         readonly DataTable dataTableRecice = new DataTable();
         readonly DataTable dataTableFidge = new DataTable();
@@ -24,7 +25,7 @@ namespace reapEAT
 
         public Recipe(int idRecipe, double portion = 0)
         {
-            this.portion = portion;
+            this.portionDiet = portion;
             InitializeComponent();
             LoadDBToTB(idRecipe);
             LoadRecipe(idRecipe);
@@ -35,6 +36,8 @@ namespace reapEAT
             this.panel1.Size = new System.Drawing.Size(226, (25 * labelsIngRec.Count + 40));
             this.ClientSize = new System.Drawing.Size(566, Math.Max(lblRecipe.Bottom, panel1.Bottom) + 4);
             this.MaximumSize = new System.Drawing.Size(582, Math.Max(lblRecipe.Bottom, panel1.Bottom) + 43);
+            if (portionDiet != 0)
+                numPortion.Value = (decimal)portionDiet;
 
 
         }
@@ -58,13 +61,17 @@ namespace reapEAT
                 lblTime.Text = (dataTable.Rows[0].Field<Int16>("Time") / 60 != 0 ? dataTable.Rows[0].Field<Int16>("Time") / 60 + " h " : "") + (dataTable.Rows[0].Field<Int16>("Time") % 60 != 0 ? dataTable.Rows[0].Field<Int16>("Time") % 60 + " m" : "");
 
                 picDish.Image = Image.FromStream(new MemoryStream(dataTable.Rows[0].Field<byte[]>("Image")));
-
-                //lblPortion.Text = dataTable.Rows[0].Field<byte>("Portion").ToString();
                 numPortion.Value = dataTable.Rows[0].Field<byte>("Portion");
-                if (portion == 0)
-                {
-                    portion = dataTable.Rows[0].Field<byte>("Portion");
-                }
+
+
+                portion = dataTable.Rows[0].Field<byte>("Portion");
+
+
+                numPortion.Value = (decimal)portion;
+
+
+
+
                 lblFav.Text = dataTable.Rows[0].Field<int>("Favourites").ToString();
 
             }
@@ -167,6 +174,9 @@ namespace reapEAT
             }
         }
 
-
+        private void PictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("You have given Star to this recipe (not made yet)", "reapEAT STAR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

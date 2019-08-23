@@ -15,3 +15,4 @@ C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.MealSearcher.resources
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Properties.Resources.resources
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.AddNewRecipe.resources
 C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.Menu.resources
+C:\Programowanie Projekty\C#\reapEAT\obj\Debug\reapEAT.ForgetPassword.resources
