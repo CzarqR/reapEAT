@@ -255,9 +255,14 @@ namespace reapEAT
             recipe.Show();
         }
 
+        /// <summary>
+        /// Simple shopping list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (cheBDiets.SelectedItems.Count < 1)
+            if (cheBDiets.CheckedItems.Count < 1)
                 return;
             DataTable fridgeDT = new DataTable();
             List<IngredientSimple> fridge = new List<IngredientSimple>();
@@ -341,7 +346,7 @@ namespace reapEAT
 
                 }
             }
-
+            MakeShoppingList();
             if (notFoundFood.Count == 0)
                 MessageBox.Show("You have everything to make all meals", "Shopping list not needed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -353,16 +358,17 @@ namespace reapEAT
                 saveFileDialog.RestoreDirectory = true;
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    using (Stream s = File.Open(saveFileDialog.FileName, FileMode.Truncate))
+                    using (Stream s = File.Open(saveFileDialog.FileName, FileMode.CreateNew))
                     using (StreamWriter sw = new StreamWriter(s))
                     {
-                        foreach (IngredientSimple item in notFoundFood)
+                        foreach (ShoppingListItem item in shoppingList)
                         {
-                            sw.Write(item.Name + " -  " + item.Quantity + "  ->" + item.ExpirationDate.ToShortDateString() + Environment.NewLine);
+                            sw.Write(item.Name + " -  " + item.Quantity + Environment.NewLine);
                         }
                     }
                 }
             }
+
         }
 
 
@@ -502,7 +508,7 @@ namespace reapEAT
         private void Button1_Click_1(object sender, EventArgs e)
         {
 
-            if (cheBDiets.SelectedItems.Count < 1)
+            if (cheBDiets.CheckedItems.Count < 1)
                 return;
             DataTable fridgeDT = new DataTable();
             List<IngredientSimple> fridge = new List<IngredientSimple>();
@@ -583,13 +589,10 @@ namespace reapEAT
                             notFoundFood.Add(new IngredientSimple(ingredientInRecipe.Field<int>("IdFood"), quantity, Recipe.Field<DateTime>("Date"), ingredientInRecipe.Field<string>("Name")));
                         }
                     }
-
                 }
             }
-
             if (notFoundFood.Count == 0)
                 MessageBox.Show("You have everything to make all meals", "Shopping list not needed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             else
             {
                 notFoundFood.Sort();
@@ -598,17 +601,19 @@ namespace reapEAT
                 saveFileDialog.RestoreDirectory = true;
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    using (Stream s = File.Open(saveFileDialog.FileName, FileMode.Truncate))
+                    using (Stream s = File.Open(saveFileDialog.FileName, FileMode.CreateNew))
                     using (StreamWriter sw = new StreamWriter(s))
                     {
                         foreach (IngredientSimple item in notFoundFood)
                         {
-                            sw.Write(item.Name + " -  " + item.Quantity + Environment.NewLine);
+                            sw.Write(item.Name + " -  " + item.Quantity + "  -> " + item.ExpirationDate.ToShortDateString() + Environment.NewLine);
                         }
                     }
                 }
             }
         }
+
+        
     }
 }
 

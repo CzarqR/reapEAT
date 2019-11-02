@@ -58,7 +58,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.butDetailedShopList = new System.Windows.Forms.Button();
             this.conMenDiets.SuspendLayout();
             this.conMenDiet.SuspendLayout();
             this.SuspendLayout();
@@ -347,18 +347,18 @@
             this.label2.TabIndex = 54;
             this.label2.Text = "Select diets you want to include in shopping list\r\n";
             // 
-            // button1
+            // butDetailedShopList
             // 
-            this.button1.BackColor = System.Drawing.Color.SandyBrown;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Location = new System.Drawing.Point(471, 374);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 28);
-            this.button1.TabIndex = 55;
-            this.button1.Text = "Detailed shopping List";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.Button1_Click_1);
+            this.butDetailedShopList.BackColor = System.Drawing.Color.SandyBrown;
+            this.butDetailedShopList.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.butDetailedShopList.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.butDetailedShopList.Location = new System.Drawing.Point(471, 374);
+            this.butDetailedShopList.Name = "butDetailedShopList";
+            this.butDetailedShopList.Size = new System.Drawing.Size(147, 28);
+            this.butDetailedShopList.TabIndex = 55;
+            this.butDetailedShopList.Text = "Detailed shopping List";
+            this.butDetailedShopList.UseVisualStyleBackColor = false;
+            this.butDetailedShopList.Click += new System.EventHandler(this.Button1_Click_1);
             // 
             // Diet
             // 
@@ -367,7 +367,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSeaGreen;
             this.ClientSize = new System.Drawing.Size(630, 414);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.butDetailedShopList);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
@@ -427,7 +427,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button butDetailedShopList;
         private System.Windows.Forms.ColumnHeader columnPortion;
     }
 }

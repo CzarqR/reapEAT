@@ -282,6 +282,7 @@
             this.butShopList.TabIndex = 16;
             this.butShopList.Text = "Shopping List";
             this.butShopList.UseVisualStyleBackColor = false;
+            this.butShopList.Click += new System.EventHandler(this.ButShopList_Click);
             // 
             // pictureBox1
             // 

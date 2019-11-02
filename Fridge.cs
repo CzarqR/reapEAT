@@ -165,6 +165,7 @@ namespace reapEAT
             using (SqlConnection sqlConnection = new SqlConnection(X.ConnectionString("DB")))
             {
                 SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(queryFridge + " AND [" + X.IdUser + "_fridge].IdFood = " + dataTableFoundFood.Rows[comBFoundFood.SelectedIndex].Field<int>("IdFood"), sqlConnection);
+                Console.WriteLine(queryFridge + " AND [" + X.IdUser + "_fridge].IdFood = " + dataTableFoundFood.Rows[comBFoundFood.SelectedIndex].Field<int>("IdFood"));
                 sqlDataAdapter.Fill(dataTableSameInFridge);
 
             }
@@ -213,6 +214,8 @@ namespace reapEAT
 
         private void SearchFood()
         {
+            txtComment.Text = "";
+            txtQuantity.Text = "";
             lblQuantity.Visible = false;
             txtQuantity.Visible = false;
             txtComment.Visible = false;
@@ -309,21 +312,22 @@ namespace reapEAT
             foreach (DataRow row in dataTableSameInFridge.Rows)
             {
 
-                ListViewItem item = new ListViewItem(row.Field<string>("Name"));
+                ListViewItem item = new ListViewItem(row.Field<string>("Name"));/// 0 Name
 
 
-                if (row.Field<double>("QuantityInFridge") == 0)
+                if (row.Field<double>("QuantityInFridge") == 0) /// 1 Quant
                     item.SubItems.Add("-");
                 else
                     item.SubItems.Add(row.Field<double>("QuantityInFridge").ToString());
 
-                item.SubItems.Add(row.Field<string>("ProductInfo").ToString());
+                item.SubItems.Add(row.Field<string>("ProductInfo").ToString()); /// 2 Info
 
-                if (row.Field<DateTime>("ExpirationDate").ToShortDateString() == "01.01.0001")
+                if (row.Field<DateTime>("ExpirationDate").ToShortDateString() == "01.01.0001") /// 3 exp Date
                     item.SubItems.Add("-");
                 else
                     item.SubItems.Add(row.Field<DateTime>("ExpirationDate").ToShortDateString());
-                item.SubItems.Add(row.Field<int>("IdItemInFridge").ToString());
+
+                item.SubItems.Add(row.Field<int>("IdItemInFridge").ToString()); /// 4 quant
 
                 listVSameFood.Items.Add(item);
 
@@ -381,6 +385,8 @@ namespace reapEAT
                 this.listVSameFood.Location = new System.Drawing.Point(402, 264);
                 if (listVSameFood.SelectedItems[0].SubItems[1].Text != "-")
                 {
+                    MessageBox.Show(listVSameFood.SelectedItems[0].SubItems[1].Text, quantity, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     quantity = ((double.Parse(listVSameFood.SelectedItems[0].SubItems[1].Text) + double.Parse(quantity)).ToString()).Replace(',', '.');
                 }
                 else
@@ -787,8 +793,7 @@ namespace reapEAT
                 {
                     for (int i = 0; i < listVFridge.Items.Count; i++)
                     {
-
-                        if (txtFoodToFind.Text == listVFridge.Items[i].SubItems[0].Text)
+                        if (listVFridge.Items[i].SubItems[0].Text.ToLower().Contains(txtFoodToFind.Text.ToLower()))
                         {
                             ListViewItem item = new ListViewItem(listVFridge.Items[i].SubItems[0].Text);//Name
                             item.SubItems.Add(listVFridge.Items[i].SubItems[1].Text);//Quantity

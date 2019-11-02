@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="reapEAT.exe" size="895456">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="reapEAT.exe" size="895968">
       <assemblyIdentity name="reapEAT" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UwUmOocymJ+fo8aYjcw+Ah0ZBoUctQVTzmWVQQyf3HA=</dsig:DigestValue>
+        <dsig:DigestValue>Ti9SikpjqekgUp1rE2s6QwzFGL/DQryOgk2U+K9qvN4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -63,13 +63,13 @@
       <dsig:DigestValue>mOESvWMqm0oBwytIChtqCQ2z/xvJJypX9sFEjCjR0/o=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="reapEAT.exe.config" size="523">
+  <file name="reapEAT.exe.config" size="434">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>pv268epF+z+K2jBQHSsJNBquihB8QGXGwosqOckT8Zw=</dsig:DigestValue>
+      <dsig:DigestValue>3CMQEQgivwW3KLaE+4Ty40bSb/5/pyvTl91GmXWepB8=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

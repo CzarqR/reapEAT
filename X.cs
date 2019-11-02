@@ -17,12 +17,8 @@ namespace reapEAT
         {
             return ConfigurationManager.ConnectionStrings[name].ConnectionString;
         }
-        public static string ImageFolder()
-        {
-            return ConfigurationManager.AppSettings["ImageFolder"];
-        }
 
-        public static int IdUser = 3014;
+        public static int IdUser;
 
 
     }

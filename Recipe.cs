@@ -17,7 +17,7 @@ namespace reapEAT
         private readonly List<Label> labelsIngRec = new List<Label>();
         private readonly List<Label> labelsIngFrid = new List<Label>();
         private double portion;
-        private double portionDiet;
+        private readonly double portionDiet;
         private bool firstLoad = false; //turn off value change event when form is loaded for the first time
         readonly DataTable dataTableRecice = new DataTable();
         readonly DataTable dataTableFidge = new DataTable();
@@ -177,6 +177,27 @@ namespace reapEAT
         private void PictureBox1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("You have given Star to this recipe (not made yet)", "reapEAT STAR", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ButShopList_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+            saveFileDialog.RestoreDirectory = true;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (Stream s = File.Open(saveFileDialog.FileName, FileMode.Create))
+                using (StreamWriter sw = new StreamWriter(s))
+                {
+                    for (int i = 0; i < labelsIngFrid.Count; i++)
+                    {
+                        if (double.Parse(labelsIngFrid[i].Text) < 0)
+                        {
+                            sw.Write(labelsIngRec[i].Text.Remove(labelsIngRec[i].Text.IndexOf("-")) + labelsIngFrid[i].Text.Remove(0,1) + Environment.NewLine);
+                        }
+                    }
+                }
+            }
         }
     }
 }
